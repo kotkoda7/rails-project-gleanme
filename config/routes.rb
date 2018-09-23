@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :location_edibles
   resources :locations
   resources :users
   resources :edibles
