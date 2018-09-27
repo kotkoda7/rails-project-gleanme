@@ -1,0 +1,32 @@
+THIS IS NOT RIGHT PROBABLY!!
+
+THIS IS SHOWING USER/1/LOCATIONS
+
+AND THERE SHOULD BE A SHOW
+USER/1/LOCATION/2
+
+<h2>Hello,
+    <%= @user.username %>
+</h2>
+
+<% if !@user.locations.empty? %>
+  
+    <h2>This is a list of your entered locations:</h2>
+   
+    Click on a location ID to add any changes.
+<br>
+ <br>
+<% @user.locations.each do |location| %>
+<li>
+    <a href="/locations/<%=location.id%>">
+       Location #<%= location.id %></a>: <%= location.address %>, <%= location.lat %>, <%= location.lng %>
+</li>
+<% end %>
+
+<% elsif @user.locations.empty? %>
+
+<h3>Your location library is currently empty. </h3>
+<br>
+Please add a location or check out the locations that have already been entered using the menu.
+
+<% end %>
