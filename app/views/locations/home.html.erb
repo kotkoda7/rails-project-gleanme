@@ -1,38 +1,18 @@
 
-
-<div class="dropdown">
-  <button class="dropbtn">MENU</button>
-  <div class="dropdown-content">
-    <a href="#">Sign In</a>
-    <a href="#">Sign Up</a>
-    <a href="#">Whatever</a>
-  </div>
-</div>
-
 <%= stylesheet_link_tag "application" %>
 <div class="wrapper">
 
     <h2>Welcome to 'Glean Me' Bellingham!</h2>
     
-      <p>
+      <center>
         <p>This site was created as part of the effort to reduce hunger. 
 
         Gleaning aims at collecting food from produce on public or private properties (with permission) or from supermarkets at the end of the day that would otherwise be thrown away. 
-      We can share the resources and distribute them to those who need them.
+      <br>We can share the resources and distribute them to those who need them.
       </p>
-        <br>
-      
-        <br>
-      </p>
-
-  <h3> To get started, click the menu icon above to SIGN UP or LOGIN if you already have an account.</h3>
-  <h4>You will also be given the option to sign in with your Github account.</h4>
-
-
-
- <ul>
+ 
   <% if @locations.exists? %>
-  	<h3>Here are the list of locations in Bellingham, WA:</h3>
+    <h3>Here are the list of locations in Bellingham, WA:</h3>
     <% @locations.each do |location| %>
     <br>
         #<a href="/locations/<%= location.id%>"><%= location.id%>  </a>
@@ -43,8 +23,16 @@
     </ul>
           <% end %>
   <% else %>
-    <h2> There are no locations in the database. Plesae sign in and create a location using the menu above.</h2>
+    <h4> There are no locations in the database. 
+    Please log in or sign in and create a location using the menu above!</h4>
 
   <% end %>
+<br>
+  
+</center>
+<br>
+
+ <ul>
+
 
 </div>
