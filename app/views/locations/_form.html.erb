@@ -1,1 +1,33 @@
 <h3> This is the form partial </h3>
+
+<%= form_for(@location) do |f| %>
+
+   <h4>Location address* 
+   	<%= f.label :address %>
+   	<%= f.text_field :address %>
+   		
+   	Latitude:*
+   	<%= f.label :lat %>
+   	<%= f.number_field :lat %>
+
+
+   	Longitude:*
+   	<%= f.label :lng %>
+   	<%= f.number_field :lng %>
+
+   	Description:
+   	<%= f.text_field :description %>
+
+   	Select a location type:
+
+   	
+   	Select a food type for this location: *
+   	
+
+   		</h4>
+      
+
+
+      <h4><%= f.submit "Submit"%></h4>
+
+    <% end %>
