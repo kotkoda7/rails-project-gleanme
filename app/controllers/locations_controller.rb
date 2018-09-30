@@ -8,6 +8,7 @@ class LocationsController < ApplicationController
 		@location = Location.new
 		@edibles = Edible.all
 		@locations = Location.all.uniq
+		@edible = Edible.new
 		#@location_edible = @location.location_edibles.build
 	end
 

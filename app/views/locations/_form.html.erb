@@ -23,13 +23,18 @@
 
    	Select a food type for this location: *
    	<%= f.fields_for :location_edibles do |le| %>
-   	<%= le.collection_select :edible_id, Edible.order('name ASC').all, :id, :name, include_blank: true %>
+   		<%= le.collection_select :edible_id, Edible.order('name ASC').all, :id, :name, include_blank: true %>
 
-   	
+   	<%= le.fields_for :edible, location.edibles.build do |e| %><br>
+    
+   		
+    Or create new food type: <%= e.text_field :name %>
+
+
 		<% end %>
-   		</h4>
+   		
+   		<% end %>
 
-
-      <h3><%= f.submit "Submit"%></h4>
+     <%= f.submit "Submit"%></h3>
 
     <% end %>

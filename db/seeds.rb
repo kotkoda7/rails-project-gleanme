@@ -16,3 +16,4 @@ at = Edible.create(name: "Apple Tree")
 bb = Edible.create(name: "Blueberry Bush")
 pr = Location.create(id: 1, loc_type: "private")
 pu = Location.create(id: 2, loc_type: "public")
+
