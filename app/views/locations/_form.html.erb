@@ -1,4 +1,3 @@
-<h3> This is the form partial </h3>
 
 <%= form_for(@location) do |f| %>
 
@@ -7,14 +6,14 @@
    	<%= f.text_field :address, placeholder: "Only Bellingham, WA Please", size: "40x1"%><br>
    		
    	<%= f.label "latitude" %>:
-   	<%= f.number_field :lat %>
+   	<%= f.number_field :lat, step: 0.01 %>
 
 
    	<%= f.label "longitude" %>:
-   	<%= f.number_field :lng %><br>
+   	<%= f.number_field :lng, step: 0.01 %><br>
 
    	<%= f.label :description %>:
-   	<%= f.text_area :description, size: "53x6" %><br>
+   	<%= f.text_area :description, placeholder: "Please describe the location", size: "53x6" %><br>
 
   	Select a location type:
 	<%= f.fields_for :locations do |l| %>
@@ -27,14 +26,15 @@
 
    	<%= le.fields_for :edible, location.edibles.build do |e| %><br>
     
-   		
-    Or create new food type: <%= e.text_field :name %>
+
+    Or create new food type: <%= e.text_field :name, placeholder: "New food type" %>
 
 
 		<% end %>
    		
    		<% end %>
+   		<br>
 
-     <%= f.submit "Submit"%></h3>
+     <%= f.submit "Add location"%></h3>
 
     <% end %>

@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   delete '/logout' => 'sessions#destroy'
 
 
-  resources :edibles, only: [:index, :show] do 
-    resources :locations, only: [:index, :show]
+    resources :locations, only: [:index, :show] do
+      resources :edibles, only: [:index, :show]
   end
 
   

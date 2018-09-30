@@ -20,9 +20,9 @@ class UsersController < ApplicationController
 
   	def update
 	    @user = find_by_id(User)
-	    redirect_to request.referer || root_path, alert: "You cannot update another user's name" unless current_user.can_edit?(@user)
+	    redirect_to request.referer || root_path, alert: "You cannot update another user" unless current_user.can_edit?(@user)
 	    if @user.update(user_params)
-	      redirect_to user_path(@user), notice: "You updated #{@user.name}"
+	      redirect_to user_path(@user), notice: "You updated the username to: #{@user.username}"
 	    else
 	      render :edit
 	    end
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-    	params.require(:user).permit(:name, :password, :password_confirmation, :admin)
+    	params.require(:user).permit(:username, :password, :password_confirmation)
   	end
   end
 
