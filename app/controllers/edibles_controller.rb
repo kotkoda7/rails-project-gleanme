@@ -10,6 +10,11 @@ class EdiblesController < ApplicationController
     !!current_user
   end
 
-  
+  private 
+
+  def edible_params
+    params.require(:edible).permit!
+  end
+
 
 end

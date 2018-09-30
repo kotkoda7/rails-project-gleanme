@@ -12,5 +12,7 @@
 #seattle = Location.create(id: 1, user_id: 2, loc_type: "public", lat: 47.6062, lng: -100.3321, address: "Seattle, WA")
 #portland = Location.create(id: 2, user_id: 1, loc_type: "private", lat: 45.5122, lng: -122.6587, address: "Portland, WA")
 
-at = Edible.create(id: 1, name: "Apple Tree")
-bb = Edible.create(id: 2, name: "Blueberry Bush")
+at = Edible.create(name: "Apple Tree")
+bb = Edible.create(name: "Blueberry Bush")
+pr = Location.create(id: 1, loc_type: "private")
+pu = Location.create(id: 2, loc_type: "public")

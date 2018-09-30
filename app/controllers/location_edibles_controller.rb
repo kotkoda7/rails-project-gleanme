@@ -1,2 +1,5 @@
 class LocationEdiblesController < ApplicationController
+
+	
+
 end

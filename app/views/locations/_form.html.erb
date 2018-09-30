@@ -2,32 +2,34 @@
 
 <%= form_for(@location) do |f| %>
 
-   <h4>Location address* 
-   	<%= f.label :address %>
-   	<%= f.text_field :address %>
+   <h3>
+   	<%= f.label :address %>:
+   	<%= f.text_field :address, placeholder: "Only Bellingham, WA Please", size: "40x1"%><br>
    		
-   	Latitude:*
-   	<%= f.label :lat %>
+   	<%= f.label "latitude" %>:
    	<%= f.number_field :lat %>
 
 
-   	Longitude:*
-   	<%= f.label :lng %>
-   	<%= f.number_field :lng %>
+   	<%= f.label "longitude" %>:
+   	<%= f.number_field :lng %><br>
 
-   	Description:
-   	<%= f.text_field :description %>
+   	<%= f.label :description %>:
+   	<%= f.text_area :description, size: "53x6" %><br>
 
-   	Select a location type:
+  	Select a location type:
+	<%= f.fields_for :locations do |l| %>
+   		<%= l.collection_select :id, Location.all, :id, :loc_type, include_blank: true %><br>
+ 		<% end %>
 
-   	
    	Select a food type for this location: *
+   	<%= f.fields_for :location_edibles do |le| %>
+   	<%= le.collection_select :edible_id, Edible.order('name ASC').all, :id, :name, include_blank: true %>
+
    	
-
+		<% end %>
    		</h4>
-      
 
 
-      <h4><%= f.submit "Submit"%></h4>
+      <h3><%= f.submit "Submit"%></h4>
 
     <% end %>
