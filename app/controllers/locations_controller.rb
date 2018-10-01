@@ -18,19 +18,19 @@ class LocationsController < ApplicationController
 
 
 	def create
-		@location = current_user.locations.new(location_params)
-		@location.save
-		redirect_to location_path(@location)
+		#location = current_user.locations.new(location_params)
+		#location.save
+		#redirect_to location_path(@location)
 	end
 
 	def edit
-		@location = find_by(params[:id]
+		#@location = find_by(params[:id]
 	end
 
 	def update
-		@location = find_by(params[:id]
-		@location.update(address: params[:address], lat: params[:lat], lng: params[:lng], description: params[:description], loc_type: params[:loc_type], location_edible: params[:location][:edible], user_id: current_user.id)
-		redirect_to location_path(@location)
+		#@location = find_by(params[:id]
+		#@location.update(address: params[:address], lat: params[:lat], lng: params[:lng], description: params[:description], loc_type: params[:loc_type], location_edible: params[:location][:edible], user_id: current_user.id)
+		#redirect_to location_path(@location)
 	end
 
 	def delete
@@ -41,7 +41,7 @@ class LocationsController < ApplicationController
 	private
 
 	def location_params
-
-		params.require(:location).permit(:address, :loc_type)
+		params.require(:location).permit!
+		#(:address, :loc_type, :description, :lat, :lng)
 	end
 end

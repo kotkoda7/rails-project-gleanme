@@ -3,11 +3,13 @@
 	
 <h3>Please sign up here:</h3>
 <br>
-<%= form_for @user do |f| %>
-	<%= render 'form', f: f %>
+
+	<%= form_for @user do |f| %>
+		<%= render 'form', f: f %>
 	<br>
+
 <%= f.submit "Submit" %>
 
-<% end %></p>
+<% end %>
 </div>
 

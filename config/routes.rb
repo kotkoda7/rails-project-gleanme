@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   #resources :location_edibles
+  
   resources :locations
   resources :users
   #resources :edibles
@@ -10,7 +11,8 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
-  delete '/logout' => 'sessions#destroy'
+
+  get '/logout' => 'sessions#destroy'
 
 
     resources :locations, only: [:index, :show] do

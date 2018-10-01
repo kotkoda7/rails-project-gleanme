@@ -1,12 +1,18 @@
-<h1>Login</h1>
-
-
+<%= stylesheet_link_tag "application" %>
+ <div class="wrapper">
+	
+<h3>Please log in here:</h3>
+<br>
 <%= form_tag '/login' do %>
 
-  <div>Name:</div> <div><%= text_field_tag :name %></div>
-  <div>Password:</div> <div><%= password_field_tag :password %></div>
-  <%= submit_tag "Submit" %>
+	<div>Name:</div> 
+	<div><%= text_field_tag :username %></div>
 
+	<div>Password:</div> 
+	<div><%= password_field_tag :password %></div>
+	<br>
 
-<% end %>
-<%= link_to "Sign in with GitHub" MISSING LINK %>
+	<%= submit_tag "Submit" %>
+
+<% end %></p>
+</div>
