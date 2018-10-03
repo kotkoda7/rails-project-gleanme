@@ -1,4 +1,12 @@
 
-  <div>Name:</div> <div><%= f.text_field :username %></div>
-  <div>Password:</div> 
-  <div><%= f.password_field :password %></div>
+  <%= render 'layouts/form_errors' %>
+  
+	<%= f.label :username, 'Username:' %>
+  	<div><%= f.text_field :username %> <br></div>
+
+  	<%= f.label :password, 'Password:' %>
+  	<div><%= f.text_field :password %></div>
+
+  	
+
+

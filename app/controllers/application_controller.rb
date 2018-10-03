@@ -1,4 +1,8 @@
 class ApplicationController < ActionController::Base
+protect_from_forgery with: :exception
+
+before_action :ensure_login
+helper_method :logged_in?, :current_user
 
 private
 
@@ -6,6 +10,13 @@ private
 	  @current_user ||= User.find(session[:user_id]) if session[:user_id]
 	end
 
-helper_method :current_user
+	def logged_in?
+		session[:user_id]
+	end
+
+	def ensure_login #always go to login page unless session contains user_id
+		#redirect_to login_path unless session[:user_id]
+	end
+
 
 end

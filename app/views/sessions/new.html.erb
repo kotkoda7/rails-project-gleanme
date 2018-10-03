@@ -1,18 +1,21 @@
 <%= stylesheet_link_tag "application" %>
  <div class="wrapper">
+
 	
 <h3>Please log in here:</h3>
 <br>
-<%= form_tag '/login' do %>
+<%= form_for :user, url: sessions_path do |f| %>
+	
+	<%= f.label :username, 'Username:' %>
+  	<div><%= f.text_field :username %> <br></div>
 
-	<div>Name:</div> 
-	<div><%= text_field_tag :username %></div>
+  	<%= f.label :password, 'Password:' %>
+  	<div><%= f.text_field :password %></div>
+  	<%= render 'layouts/form_errors' %>
+  		<br>
 
-	<div>Password:</div> 
-	<div><%= password_field_tag :password %></div>
-	<br>
+	<%= f.submit "Submit" %>
+	
 
-	<%= submit_tag "Submit" %>
-
-<% end %></p>
+<% end %>
 </div>

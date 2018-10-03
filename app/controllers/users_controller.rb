@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_filter :authorized, except: [:new, :create, :show]
+	
 
 	def new
 		@user = User.new
@@ -9,28 +9,15 @@ class UsersController < ApplicationController
 	    @user = User.new(user_params)
 	    if @user.save
 	      session[:user_id] = @user.id
-	      redirect_to user_path(@user), notice: "You are signed up"
+	      redirect_to root_path, notice: "You are signed up"
+	      #redirect_to 'user_path(@user)'
 	    else
 	      render 'new'
 	    end
   	end
 
-  	def edit
-    	@user = find_by_id(User)
-  	end
-
-  	def update
-	    @user = find_by_id(User)
-	    redirect_to request.referer || root_path, alert: "You cannot update another user" unless current_user.can_edit?(@user)
-	    if @user.update(user_params)
-	      redirect_to user_path(@user), notice: "You updated the username to: #{@user.username}"
-	    else
-	      render :edit
-	    end
-  	end
-
   	def show
-    	@user = find_by_id(User)
+  		user = User.find(params[:id])
     	@locations = @user.locations
     end
 

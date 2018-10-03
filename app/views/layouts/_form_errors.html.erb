@@ -1,10 +1,6 @@
-<% if form.errors.any? %>
+ <ul>
 
-    <h3>There were some errors:</h3>
-    <ul>
-      <% form.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
+	  <%= content_tag(:div, flash[:danger], :id => "flash_danger") if flash[:danger] %>
+	  <%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
 
-<% end %>
+</ul>

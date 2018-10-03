@@ -8,9 +8,12 @@ Rails.application.routes.draw do
   root to: 'locations#home'
 
   #If you need to use a different controller namespace inside a namespace block you can specify an absolute controller path
+  resources :sessions , only: [:new, :create, :destroy]
+
   get '/signup' => 'users#new'
+  
   get '/login' => 'sessions#new'
-  post '/login' => 'sessions#create'
+  #post '/login' => 'sessions#create'
 
   get '/logout' => 'sessions#destroy'
 

@@ -26,10 +26,7 @@
     display: block;
   }
 
-  .flash {
-    color: red;
-    font-size: 15px;
-  }
+
 
   html, body {
     height: 100%;
@@ -55,10 +52,10 @@
   }
 
 
-
   .main {
     overflow: hidden;
   }
+
   
   h1 {
     white-space: nowrap;
@@ -116,6 +113,7 @@
     float: none;
     width: 100%;
   }
+
 
   
 }
