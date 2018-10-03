@@ -1,0 +1,28 @@
+ 
+<%= stylesheet_link_tag "application" %>
+<div class="wrapper">
+
+  <% if @locations.exists? %>
+    <h3>Here are the list of locations entered into the database in Bellingham, WA:</h3>
+    <% @locations.each do |location| %>
+    <br>
+
+    CHANGE THIS TO RAILS:
+        <a href="/locations/<%= location.id%>"><%= location.id%>  </a>
+        <%= location.address%>,
+        <br>Lat.: <%= location.lat.to_f%>
+        <br>Long.: <%= location.lng.to_f%>
+    <br>
+   
+          <% end %>
+  <% else %>
+    <h4> There are no locations in the database. 
+    Please log in or sign in and create a location using the menu above!</h4>
+
+  <% end %>
+<br>
+  
+</center>
+<br>
+
+ </div>

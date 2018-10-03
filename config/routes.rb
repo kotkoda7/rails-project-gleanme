@@ -3,12 +3,17 @@ Rails.application.routes.draw do
   
   resources :locations
   resources :users
-  #resources :edibles
+  
+
+  resources :edibles, only: [:index] do
+    resources :locations, only: [:index]
+  end
+
 
   root to: 'locations#home'
 
   #If you need to use a different controller namespace inside a namespace block you can specify an absolute controller path
-  resources :sessions , only: [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create, :destroy]
 
   get '/signup' => 'users#new'
   
@@ -18,9 +23,11 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy'
 
 
-    resources :locations, only: [:index, :show] do
-      resources :edibles, only: [:index, :show]
+    resources :users do
+      resources :locations do
+        resources :edibles
   end
+end
 
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

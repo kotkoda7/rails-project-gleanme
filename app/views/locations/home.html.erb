@@ -10,28 +10,6 @@
         Gleaning aims at collecting food from produce on public or private properties (with permission) or from supermarkets at the end of the day that would otherwise be thrown away. 
       <br>We can share the resources and distribute them to those who need them.
       </p>
- 
-  <% if @locations.exists? %>
-    <h3>Here are the list of locations in Bellingham, WA:</h3>
-    <% @locations.each do |location| %>
-    <br>
-        #<a href="/locations/<%= location.id%>"><%= location.id%>  </a>
-        <%= location.address%>,
-        <br>Lat.: <%= location.lat.to_f%>
-        <br>Long.: <%= location.lng.to_f%>
-    <br>
-    </ul>
-          <% end %>
-  <% else %>
-    <h4> There are no locations in the database. 
-    Please log in or sign in and create a location using the menu above!</h4>
-
-  <% end %>
-<br>
-  
 </center>
-<br>
-
- <ul>
 
 </div>

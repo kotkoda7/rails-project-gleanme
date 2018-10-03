@@ -19,11 +19,6 @@ user = User.find_by(params[:id])
   end
 
 
-
-
-  
-
-
   def destroy
     #reset_session
     session.clear
