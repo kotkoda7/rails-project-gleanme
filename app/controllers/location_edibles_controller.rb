@@ -1,5 +1,4 @@
 class LocationEdiblesController < ApplicationController
 
-	
 
 end

@@ -5,28 +5,26 @@
    	<%= f.label :address %>:
    	<%= f.text_field :address, placeholder: "Only Bellingham, WA Please", size: "40x1"%><br>
    		
-   	<%= f.label "latitude" %>:
+   	<%= f.label :lat, "latitude" %>:
    	<%= f.number_field :lat, step: 0.01 %>
 
 
-   	<%= f.label "longitude" %>:
+   	<%= f.label :lng, "longitude" %>:
    	<%= f.number_field :lng, step: 0.01 %><br>
 
    	<%= f.label :description %>:
    	<%= f.text_area :description, placeholder: "Please describe the location", size: "53x6" %><br>
 
   	Select a location type:
-	<%= f.fields_for :locations do |l| %>
-   		<%= l.collection_select :id, Location.all, :id, :loc_type, include_blank: true %><br>
+	     <%= f.fields_for :locations do |l| %>
+   		 <%= l.collection_select :id, Location.all, :id, :loc_type, include_blank: true %><br>
  		<% end %>
 
    	Select a food type for this location: *
    	<%= f.fields_for :location_edibles do |le| %>
    		<%= le.collection_select :edible_id, Edible.order('name ASC').all, :id, :name, include_blank: true %>
-
-   	<%= le.fields_for :edible, location.edibles.build do |e| %><br>
-    
-
+<br>
+   	<%= le.fields_for :edible, @location.edibles.build do |e| %>
     Or create new food type: <%= e.text_field :name, placeholder: "New food type" %>
 
 

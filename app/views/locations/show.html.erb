@@ -1,6 +1,7 @@
+<%= stylesheet_link_tag "application" %>
+<div class="wrapper">
 
-
-<h2>Details of location:
+<h2>Details of location:</h2>
 
 <h3>Location id: 
     #<%= @location.id %> </h3>
@@ -23,5 +24,9 @@
 <br>
 
 <h3>Food available:</h3>
-	<%= @location_edible.edible_name %>
+	 <% @edibles.each do |edible| %>
+
+	<%= edibles.name %>
+	<% end %>
 <br>
+</div>
