@@ -19,5 +19,7 @@ can edit only if current_user!
 
 NEED ERROR message if username already exist -> can't sign up or log in
 
+Authorize_user issue??? 
+
 
 

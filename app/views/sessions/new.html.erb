@@ -3,13 +3,13 @@
 
 <h3>Please log in here:</h3>
 <br>
-<%= form_for :user, url: sessions_path do |f| %>
+<%= form_for(:user, url: sessions_path) do |f| %>
 	
 	<%= f.label :username, 'Username:' %>
   	<div><%= f.text_field :username %> <br></div>
 
   	<%= f.label :password, 'Password:' %>
-  	<div><%= f.text_field :password %></div>
+  	<div><%= f.password_field :password %></div>
   	<%= render 'layouts/form_errors' %>
   		<br>
 
