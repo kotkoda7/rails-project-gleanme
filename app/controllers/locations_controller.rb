@@ -11,23 +11,17 @@ class LocationsController < ApplicationController
 	end
 
 	def new
-    
-    	#@locations = Location.all.group(:loc_type)
-    	#@edibles = Location.all.group(:edible)
-		
-		#@edibles = Edible.all
-		#@locations = Location.all
-		#@location.
+    	@location = Location.new
+   
 	end
 
 	def create
 		
 		#location = current_user.locations.new
-		@locations = Location.all
 		@location = Location.new(location_params)
 		@location.user = current_user
 		@location.save
-		redirect_to user_locations_path(@user)
+		redirect_to user_path(current_user)
 	end
 
 	def edit
@@ -47,6 +41,6 @@ class LocationsController < ApplicationController
 	private
 
 	def location_params
-		params.require(:location).permit!
+		params.require(:location).permit(:address, :lat, :lng, :description) 
 	end
 end

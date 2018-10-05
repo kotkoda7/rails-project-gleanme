@@ -1,13 +1,5 @@
-THIS IS NOT RIGHT PROBABLY!!
-
-THIS IS SHOWING USER/1/LOCATIONS
-
-AND THERE SHOULD BE A SHOW
-USER/1/LOCATION/2
-
-<h2>Hello,
-    <%= @user.username %>
-</h2>
+<%= stylesheet_link_tag "application" %>
+ <div class="wrapper">
 
 <% if !@user.locations.empty? %>
   
@@ -32,3 +24,4 @@ USER/1/LOCATION/2
 Please add a location or check out the locations that have already been entered using the menu.
 
 <% end %>
+</div>

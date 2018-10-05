@@ -4,17 +4,17 @@ def new
   @user = User.new
 end
 
-  def create
-    user = User.find_by(params[:id])
-
-    if user && user.authenticate(params[:password])
+def create
+    @user = User.find_by(params[:username])
+    if @user && @user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to user_path(user), notice: "You are logged in!"
+      redirect_to root_path, :notice => "You are logged in!"
     else
-        flash.now[:danger] = "Your username or password is incorrect!"
-        render 'new'
+      flash.now.alert = "Invalid username or password"
+      redirect_to login_path
     end
-  end
+end
+
 
 
 

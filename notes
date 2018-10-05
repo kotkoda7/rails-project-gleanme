@@ -10,3 +10,12 @@ If want to sign up but already have an account with same username >> need error 
 
 Error should be on the TOP and possibly different color!
 
+users/show page MY LOCATIONS!
+User name and list of locations (not detailed) for particular user
+
+locations/show page
+detail of certain location
+can edit only if current_user!
+
+
+
