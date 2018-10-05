@@ -2,6 +2,8 @@ class User < ApplicationRecord
 
 	has_secure_password
 
+	#accepts_nested_attributes_for :locations, allow_destroy: true
+
 
   	has_many :locations
 

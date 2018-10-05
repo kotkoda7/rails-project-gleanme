@@ -1,0 +1,12 @@
+How to do 
+Locations - index
+user/locations - index?
+
+Nested forms for Location (allow nested attr for) - OR User index
+
+Update user#index form and controller action
+
+If want to sign up but already have an account with same username >> need error message!
+
+Error should be on the TOP and possibly different color!
+

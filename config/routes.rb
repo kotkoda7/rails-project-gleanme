@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   #resources :location_edibles
   
+  root to: 'locations#home'
+
   resources :locations
   resources :users
   
@@ -10,7 +12,7 @@ Rails.application.routes.draw do
   end
 
 
-  root to: 'locations#home'
+
 
   #If you need to use a different controller namespace inside a namespace block you can specify an absolute controller path
   resources :sessions, only: [:new, :create, :destroy]

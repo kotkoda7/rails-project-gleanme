@@ -1,0 +1,17 @@
+
+<h4>This will show all the locations for the particular user.</h4>
+
+
+<h1>My Locations</h1>
+
+
+    <% @locations.each do |location| %>
+      <%= link_to location.id, location %>
+
+          <% if location.user == current_user %>
+            <%= link_to 'Edit', edit_location_path(location) %>
+          <% end %>
+
+          <% if location.user == current_user %>
+            <%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
