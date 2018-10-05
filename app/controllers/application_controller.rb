@@ -4,10 +4,10 @@ protect_from_forgery with: :exception
 #before_action :ensure_login
 helper_method :logged_in?, :current_user
 
-private
+
 
 	def current_user
-    	@current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    	User.find_by(id: session[:user_id]) if session[:user_id]
   	end
 
 	def logged_in?
@@ -20,12 +20,8 @@ private
 		#redirect_to login_path unless session[:user_id]
 	end
 
-	def authenticate_user
-      if !logged_in?
-        flash[:alert] = "You must be logged in to access this page!"
-        redirect_to login_path
-      end
+
     end
 
 
-end
+

@@ -29,8 +29,10 @@
 	<%= edibles.name %>
 	<% end %>
 <br>
+
+<% if current_user %>
+	<%= link_to "Edit My Location", edit_user_location_path(current_user) %>
+<% end %>
+
 </div>
 
-<% if @location.user == current_user %>
-<%= link_to "Edit My Location", edit_user_location_path(@location) %>
-<% end %>

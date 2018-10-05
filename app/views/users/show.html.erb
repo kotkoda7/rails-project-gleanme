@@ -10,7 +10,7 @@
  <br>
 <% @user.locations.each do |location| %>
 <li>
-    <%= link_to location.id %>: 
+    <%= link_to location.id, location_path %>: 
        <%= location.address %>, 
        <%= location.lat %>, 
        <%= location.lng %>
@@ -24,4 +24,7 @@
 Please add a location or check out the locations that have already been entered using the menu.
 
 <% end %>
+
+
+		
 </div>

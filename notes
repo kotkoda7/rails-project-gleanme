@@ -17,5 +17,7 @@ locations/show page
 detail of certain location
 can edit only if current_user!
 
+NEED ERROR message if username already exist -> can't sign up or log in
+
 
 

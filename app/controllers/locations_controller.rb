@@ -4,6 +4,9 @@ class LocationsController < ApplicationController
 		@locations = Location.all
 	end
 
+	def home
+	end
+
 
 	def show
 	 	@location = Location.find_by(params[:id])
@@ -16,8 +19,6 @@ class LocationsController < ApplicationController
 	end
 
 	def create
-		
-		#location = current_user.locations.new
 		@location = Location.new(location_params)
 		@location.user = current_user
 		@location.save
@@ -25,7 +26,7 @@ class LocationsController < ApplicationController
 	end
 
 	def edit
-		#@location = Location.find_by(params[:id])
+		@location = Location.find_by(params[:id])
 	end
 
 	def update
