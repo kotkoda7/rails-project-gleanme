@@ -8,10 +8,22 @@ class UsersController < ApplicationController
 
 	def index
 		@user = User.find(params[:id])
-		@locations = @user.locations
-		redirect_to user_locations_path
+		#@locations = @user.locations
+		#redirect_to user_locations_path
 	end
 
+	  def create
+	    user = User.find_by(username: params[:session][:username].downcase)
+
+	    if user && user.authenticate(params[:session][:password])
+	      session[:user_id] = user.id
+	      redirect_to user_locations_path(@user)
+	    else
+	      flash.now[:danger] = 'Invalid email/password combination. Try again.'
+	      render 'new'
+	    end
+  	end
+=begin
 	def create
 	    @user = User.new(user_params)
 	    if @user.save
@@ -22,7 +34,7 @@ class UsersController < ApplicationController
 	      render 'new'
 	    end
   	end
-
+=end
   	def show
   		@user = User.find(params[:id])
      	@locations = @user.locations 

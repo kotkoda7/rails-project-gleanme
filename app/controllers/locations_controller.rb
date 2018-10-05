@@ -7,22 +7,27 @@ class LocationsController < ApplicationController
 
 	def show
 	 	@location = Location.find_by(params[:id])
-	 	#@edibles = @location.edibles
+	 	@edibles = @location.edibles #nested??
 	end
 
 	def new
-		@location = Location.new
-		#@edible = Edible.new
+    
+    	#@locations = Location.all.group(:loc_type)
+    	#@edibles = Location.all.group(:edible)
+		
 		#@edibles = Edible.all
 		#@locations = Location.all
-		#@location.edibles.build
+		#@location.
 	end
 
 	def create
+		
+		#location = current_user.locations.new
+		@locations = Location.all
 		@location = Location.new(location_params)
 		@location.user = current_user
 		@location.save
-		#redirect_to location_path(@location)
+		redirect_to user_locations_path(@user)
 	end
 
 	def edit

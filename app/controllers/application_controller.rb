@@ -16,9 +16,16 @@ private
 
 	def ensure_login 
 		redirect_to login_path unless session[:user_id]
-	#always go to login page unless session contains user_id
+		#always go to login page unless session contains user_id
 		#redirect_to login_path unless session[:user_id]
 	end
+
+	def authenticate_user
+      if !logged_in?
+        flash[:alert] = "You must be logged in to access this page!"
+        redirect_to login_path
+      end
+    end
 
 
 end

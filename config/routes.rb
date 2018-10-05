@@ -26,8 +26,7 @@ Rails.application.routes.draw do
 
 
     resources :users do
-      resources :locations do
-        resources :edibles
+      resources :locations
   end
 end
 
