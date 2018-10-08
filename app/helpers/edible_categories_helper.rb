@@ -1,0 +1,2 @@
+module EdibleCategoriesHelper
+end

@@ -1,4 +1,5 @@
 class LocationsController < ApplicationController
+	before_action :ensure_login, only: [:new, :create, :edit, :update]
 
 	def index
 		@locations = Location.all

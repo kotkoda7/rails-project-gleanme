@@ -1,9 +1,7 @@
 class ApplicationController < ActionController::Base
 protect_from_forgery with: :exception
 
-#before_action :ensure_login
 helper_method :logged_in?, :current_user
-
 
 
 	def current_user
@@ -15,9 +13,10 @@ helper_method :logged_in?, :current_user
 	end
 
 	def ensure_login 
-		redirect_to login_path unless session[:user_id]
-		#always go to login page unless session contains user_id
-		#redirect_to login_path unless session[:user_id]
+		unless session.include? :user_id
+      		redirect_to '/'
+      	flash[:message] = "Please sign up or log in!"
+    end
 	end
 
 

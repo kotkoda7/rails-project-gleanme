@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
-  #resources :location_edibles
   
   root to: 'locations#home'
 
   resources :locations
   resources :users
   
-
-  resources :edibles, only: [:index] do
-    resources :locations, only: [:index]
+  
+  resources :edibles do
+    resources :edible_categories
   end
 
   resources :sessions, only: [:new, :create, :destroy]
