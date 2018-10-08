@@ -1,0 +1,7 @@
+<h1> All Categories: </h1>
+
+  <% @edible_categories.each do |ec| %>
+  <ul>
+    <li><%= link_to ec.name, edible_categories_path(edible_category) %> </li>
+  </ul>
+  <% end %>

@@ -6,12 +6,13 @@ class LocationsController < ApplicationController
 	end
 
 	def home
+		#Welcome page
 	end
 
 
 	def show
 	 	@location = Location.find_by(params[:id])
-	 	@edibles = @location.edibles #nested??
+	 	@edibles = @location.edibles
 	end
 
 	def new
@@ -21,7 +22,7 @@ class LocationsController < ApplicationController
 
 	def create
 		@location = Location.new(location_params)
-		@location.user = current_user
+		#@location.user = current_user
 		@location.save
 		redirect_to user_path(current_user)
 	end

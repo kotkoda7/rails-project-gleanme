@@ -1,10 +1,9 @@
-SHOULD CHANGE THIS LATER
 
 <%= stylesheet_link_tag "application" %>
  <div class="wrapper">
 
 <% if @edibles.exists? %>
-    <h3>Here are the list of food types in our database in Bellingham, WA:</h3>
+    <h3>Here are the list of food in our database:</h3>
     <% @edibles.each do |edible| %>
     <br>
         <%=link_to edible.name, edible_locations_path(edible) %>
@@ -17,3 +16,4 @@ SHOULD CHANGE THIS LATER
     Please log in or sign in and create a location using the menu above!</h4>
 
   <% end %>
+</div>

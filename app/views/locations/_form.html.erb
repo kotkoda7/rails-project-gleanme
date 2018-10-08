@@ -2,8 +2,9 @@
 <%= form_for(@location) do |f| %>
 
    <h3>
+    <%= f.label "Date added", :date %>,
    	<%= f.label :address %>:
-   	<%= f.text_field :address, placeholder: "Only Bellingham, WA Please", size: "40x1"%><br>
+   	<%= f.text_field :address, size: "40x1"%><br>
    		
    	<%= f.label :lat, "latitude" %>:
    	<%= f.number_field :lat, step: 0.01 %>
@@ -15,24 +16,28 @@
    	<%= f.label :description %>:
    	<%= f.text_area :description, placeholder: "Please describe the location", size: "53x6" %><br>
 
-  	Select a location type:
+  	Location type:
 	     <%= f.fields_for :locations do |l| %>
-   		 <%= l.collection_select :id, Location.all, :id, :loc_type, include_blank: true %><br>
+   		 <%= l.collection_select :id, Location.all, :id, :loc_type, include_blank: false %><br>
  		<% end %>
 
-   	Select a food type for this location: *
-   	<%= f.fields_for :location_edibles do |le| %>
-   		<%= le.collection_select :edible_id, Edible.order('name ASC').all, :id, :name, include_blank: true %>
-<br>
-   	<%= le.fields_for :edible, @location.edibles.build do |e| %>
-    Or create new food type: <%= e.text_field :name, placeholder: "New food type" %>
+  <br>
+    Food type:
+   	<%= f.fields_for :edible do |le| %>
+   		<%= le.collection_select :edible_id, Edible.order('name ASC').all, :id, :name, include_blank: false %>
+      <% end %>
 
+  <br>
+      Category:
+      <%= f.fields_for :edible_category do |ec| %>
+      <%= l.collection_select :edble_category_id, EdibleCategory.all, :id, :name, include_blank: false %><br>
+    <% end %>
 
-		<% end %>
-   		
+    <br>
+   	
    		<% end %>
    		<br>
 
-     <%= f.submit "Add location"%></h3>
+     <%= f.submit%></h3>
 
     <% end %>

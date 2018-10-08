@@ -5,5 +5,18 @@
 
 	<%= render 'form' %>
 
+	<%= le.fields_for :edible, @location.edibles.build do |e| %>
+      Create new food type: 
+
+      <%= e.text_field :name, placeholder: "New food type" %>
+
+      Please add a food category:
+      <%= e.text_field :name, placeholder: "New food type" %>
+
+
+    <% end %>
+
+
+
 
 

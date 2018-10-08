@@ -9,13 +9,24 @@ class EdibleCategoriesController < ApplicationController
 		@ediblecat = EdibleCategory.new
 	end
 
+	def show
+		@ediblecat = EdibleCategory.fing_by(params[:id])
+		@edibles = @ediblecat.edibles
+	end
+
 	def create
 	    @ediblecat = EdibleCategory.create(ediblecategory_params)
 	    if @ediblecat.save
-	      redirect_to ediblecategory_path(@ediblecat)
+	      redirect_to edible_category_edibles_path(@ediblecat)
 	    else
 	      render 'new'
 	    end
+  	end
+
+  	private
+
+  	def ediblecategory_params
+  		params.require(:edible_category).permit(:name)
   	end
 
 end
