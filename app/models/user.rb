@@ -4,8 +4,8 @@ class User < ApplicationRecord
 
 	#accepts_nested_attributes_for :locations, allow_destroy: true
 
-
-  	has_many :locations
+	has_many :locations
+  	has_many :edibles, through: :locations
 
   	validates :username, presence: true, uniqueness: true
 

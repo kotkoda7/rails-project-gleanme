@@ -11,10 +11,6 @@ Rails.application.routes.draw do
     resources :locations, only: [:index]
   end
 
-
-
-
-  #If you need to use a different controller namespace inside a namespace block you can specify an absolute controller path
   resources :sessions, only: [:new, :create, :destroy]
 
   get '/signup' => 'users#new'
