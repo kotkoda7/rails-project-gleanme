@@ -1,8 +1,9 @@
 
 <%= form_for(@location) do |f| %>
 
+<%= f.hidden_field :user_id %>
+
    <h3>
-  
    	<%= f.label :address %>:
    	<%= f.text_field :address, size: "40x1"%><br>
    		
@@ -19,7 +20,7 @@
     <br>
     Location type:
        <%= f.fields_for :locations do |l| %>
-       <%= l.collection_select :id, Location.all, :id, :loc_type, include_blank: false %><br>
+       <%= l.collection_select :id, Location.all, :id, :loc_type, include_blank: true %><br>
     <% end %>
 
   <br>

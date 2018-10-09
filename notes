@@ -1,4 +1,7 @@
 
+
+
+---------
 SESSIONS
 - new -> log in
 
@@ -6,12 +9,13 @@ USERS
 - new -> sign up
 - index -> aka user's entered locations (list of) with link to show pages
 - show -> aka user's specific location (with edibles and categories etc)
-- edit -> user's specific entered location (with edibles and categories etc)
+
 
 LOCATIONS
 - index -> list of ALL locations in database
 - show -> details of a location 
 - new -> add a new location (aka user's location), must be logged in to do that
+- edit -> user's specific entered location (with edibles and categories etc)
 NO EDIT OR DELETE for other's locations allowed
 
 EDIBLES

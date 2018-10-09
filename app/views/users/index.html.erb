@@ -8,9 +8,9 @@
     <%= f.date_field :created_at %><br>
 
 
-    <% @locations.each do |location| %>
-    	<%= link_to location.id %>
-    	<%= location.address %>
+   <ul> <% @locations.each do |location| %>
+    	<li> <%= link_to location.id %> </li>
+    	<li> <%= location.address %> </li>
 
-
+</ul>
 </div>

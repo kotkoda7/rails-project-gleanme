@@ -10,7 +10,7 @@
  <br>
 <% @user.locations.each do |location| %>
 <li>
-    <%= link_to location.id, location_path %>: 
+    <%= link_to location.id, edit_user_location_path(current_user) %>: 
        <%= location.address %>, 
        <%= location.lat %>, 
        <%= location.lng %>
