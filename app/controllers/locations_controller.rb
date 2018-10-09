@@ -2,7 +2,12 @@ class LocationsController < ApplicationController
 	before_action :ensure_login, only: [:new, :create, :edit, :update]
 
 	def index
-		@locations = Location.all
+		if params[:user_id]
+      		@locations = User.find(params[:user_id]).locations
+    	else
+      		@locations = Location.all
+      		redirect_to locations_path
+    	end
 	end
 
 	def home
@@ -17,7 +22,7 @@ class LocationsController < ApplicationController
 
 	def new
     	@location = Location.new
-   
+    	#@userlocs = @location.users
 	end
 
 	def create
@@ -44,6 +49,6 @@ class LocationsController < ApplicationController
 	private
 
 	def location_params
-		params.require(:location).permit(:address, :lat, :lng, :description) 
+		params.require(:location).permit(:address, :lat, :lng, :description, :edible_ids => []) 
 	end
 end

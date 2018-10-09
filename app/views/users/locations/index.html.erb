@@ -1,12 +1,17 @@
+<%= stylesheet_link_tag "application" %>
+ <div class="wrapper">
 
-<h4>This will show all the locations for the particular user.</h4>
+  <h1>My Locations:</h1>
 
 
-<h1>My Locations</h1>
+  <%= f.label :created_at, "Created at" %>
+    <%= f.date_field :created_at %><br>
 
 
     <% @locations.each do |location| %>
-      <%= link_to location.id, location %>
+    	<%= link_to location.id %>
+    	<%= location.address %>
+
 
           <% if location.user == current_user %>
             <%= link_to 'Edit', edit_location_path(location) %>
@@ -15,3 +20,4 @@
           <% if location.user == current_user %>
             <%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %>
           <% end %>
+</div>

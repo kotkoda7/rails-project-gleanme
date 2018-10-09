@@ -8,17 +8,19 @@ Rails.application.routes.draw do
   #post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
 
-  resources :locations do
-    resources :edibles
-  end
+  #resources :locations do
+    #resources :edibles
+  #end
 
-  resources :edible_categories do
+  resources :edible_categories
     resources :edibles
-  end
+  #end
 
-    resources :users do
-      resources :locations
-  end
+  resources :users, only: [:show] do
+    resources :locations, only: [:show, :index]
+end
+
+  resources :locations, only: [:index]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -1,6 +1,28 @@
-How to do 
-Locations - index
-user/locations - index?
+
+SESSIONS
+- new -> log in
+
+USERS 
+- new -> sign up
+- index -> aka user's entered locations (list of) with link to show pages
+- show -> aka user's specific location (with edibles and categories etc)
+- edit -> user's specific entered location (with edibles and categories etc)
+
+LOCATIONS
+- index -> list of ALL locations in database
+- show -> details of a location 
+- new -> add a new location (aka user's location), must be logged in to do that
+NO EDIT OR DELETE for other's locations allowed
+
+EDIBLES
+- user should be able to add an edible and choose or add a category (for edible)
+   -> should this be done through the views/locations/new page OR here?
+- edit edible name (if misspelled etc)
+
+EDIBLE_CATEGORIES
+- should be able to add a new category, but only if an edible is added
+- dropdown of (existing) categories to add to new edible
+
 
 Nested forms for Location (allow nested attr for) - OR User index
 

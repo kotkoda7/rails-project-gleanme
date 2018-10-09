@@ -5,21 +5,22 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(username: params[:user][:username])
-    password = params[:user][:password]
-      if user && user.authenticate(password)
-        session[:user_id] = user.id
-        redirect_to root_path, notice: "You have successfully logged in"
+    @user = User.find_by(username: params[:user][:username])
+      if @user.nil? || !@user.authenticate(params[:user][:password])
+        flash.now[:notice] = "Your username or password is not correct"
+        render :new
       else
-        flash[:alert] = "Your username or password is not correct"
-        redirect_to login_path
+        session[:user_id] = @user.id
+        flash.now[:notice] = "You have successfully logged in"
+        redirect_to user_locations_path(@user)
       end
     end
 
 
   def destroy
     session.clear
-    redirect_to login_path, :notice => "You are logged out!"
+    flash.now[:notice] =  "You are logged out!"
+    redirect_to root_path
   end
 
 end

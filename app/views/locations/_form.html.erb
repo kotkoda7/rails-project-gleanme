@@ -2,40 +2,38 @@
 <%= form_for(@location) do |f| %>
 
    <h3>
-    <%= f.label "Date added", :date %>,
+  
    	<%= f.label :address %>:
    	<%= f.text_field :address, size: "40x1"%><br>
    		
-   	<%= f.label :lat, "latitude" %>:
+   	<%= f.label :lat, "Latitude" %>:
    	<%= f.number_field :lat, step: 0.01 %>
 
 
-   	<%= f.label :lng, "longitude" %>:
+   	<%= f.label :lng, "Longitude" %>:
    	<%= f.number_field :lng, step: 0.01 %><br>
 
    	<%= f.label :description %>:
-   	<%= f.text_area :description, placeholder: "Please describe the location", size: "53x6" %><br>
+   	<%= f.text_area :description, placeholder: "Please describe the location", size: "53x6" %>
 
-  	Location type:
-	     <%= f.fields_for :locations do |l| %>
-   		 <%= l.collection_select :id, Location.all, :id, :loc_type, include_blank: false %><br>
- 		<% end %>
+    <br>
+    Location type:
+       <%= f.fields_for :locations do |l| %>
+       <%= l.collection_select :id, Location.all, :id, :loc_type, include_blank: false %><br>
+    <% end %>
 
   <br>
     Food type:
-   	<%= f.fields_for :edible do |le| %>
-   		<%= le.collection_select :edible_id, Edible.order('name ASC').all, :id, :name, include_blank: false %>
+    <%= f.fields_for :edible do |le| %>
+      <%= le.collection_select :edible_id, Edible.order('name ASC').all, :id, :name, include_blank: false %>
       <% end %>
 
   <br>
       Category:
       <%= f.fields_for :edible_category do |ec| %>
-      <%= l.collection_select :edble_category_id, EdibleCategory.all, :id, :name, include_blank: false %><br>
+      <%= ec.collection_select :edble_category_id, EdibleCategory.all, :id, :name, include_blank: false %><br>
     <% end %>
 
-    <br>
-   	
-   		<% end %>
    		<br>
 
      <%= f.submit%></h3>
