@@ -4,9 +4,10 @@ class LocationsController < ApplicationController
 	def index
 		if params[:user_id]
       		@locations = User.find(params[:user_id]).locations
+      		redirect_to user_locations_path
     	else
       		@locations = Location.all
-      		redirect_to locations_path
+      		#redirect_to locations_path
     	end
 	end
 

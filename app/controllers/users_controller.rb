@@ -3,11 +3,9 @@ class UsersController < ApplicationController
 	before_action :authorize_user, only: [:edit, :update, :destroy]
 	
 
-
 	def index
 		@user = User.find(params[:id])
 		@locations = @user.locations
-		#redirect_to user_locations_path
 	end
 
 	 def show
