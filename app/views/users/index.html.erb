@@ -1,8 +1,8 @@
 <%= stylesheet_link_tag "application" %>
  <div class="wrapper">
 
-  <h1>My Locations:</h1>
 
+  <h1>Locations entered by: <%= @user.name %> </h1>
 
   <%= f.label :created_at, "Created at" %>
     <%= f.date_field :created_at %><br>

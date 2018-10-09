@@ -17,11 +17,11 @@ class LocationsController < ApplicationController
 
 	def show
 	 	@location = Location.find_by(params[:id])
-	 	@edibles = @location.edibles
+	 	#@edibles = @location.edibles
 	end
 
 	def new
-    	@location = Location.new
+    	@location = Location.new(user_id: params[:user_id])
     	#@userlocs = @location.users
 	end
 

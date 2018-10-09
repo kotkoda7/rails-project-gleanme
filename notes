@@ -23,7 +23,24 @@ EDIBLE_CATEGORIES
 - should be able to add a new category, but only if an edible is added
 - dropdown of (existing) categories to add to new edible
 
+----------------
 
+Nested routes:
+- users and locations
+paths: 
+locations (index)
+locations/:id 
+
+users/:id/locations (index)
+
+users/:id/locations/:id (show, edit, update and new, create)
+
+Nested form (via join table):
+- Locations
+- Edibles
+- Edible categories
+
+----------------
 Nested forms for Location (allow nested attr for) - OR User index
 
 Update user#index form and controller action

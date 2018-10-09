@@ -16,11 +16,11 @@ Rails.application.routes.draw do
     resources :edibles
   #end
 
-  resources :users, only: [:show] do
-    resources :locations, only: [:show, :index]
+  resources :users, only: [:index, :show] do
+    resources :locations
 end
 
-  resources :locations, only: [:index]
+  resources :locations, only: [:show, :index]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
