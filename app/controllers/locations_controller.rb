@@ -11,7 +11,7 @@ class LocationsController < ApplicationController
       		redirect_to user_locations_path
     	else
       		@locations = Location.all
-      		#redirect_to locations_path
+      		redirect_to locations_path
     	end
 	end
 
@@ -22,27 +22,21 @@ class LocationsController < ApplicationController
 
 	def new
 		if logged_in?
+			@user = User.find_by(id: params[:user_id])
 			@location = Location.new(user_id: params[:user_id])
 		else
 			redirect_to locations_path, alert: "You must be logged in to create a location."
 		end
 	end
 
-#want to make sure location is created/updated as user's lcoation!
 	def create
 		@location = Location.new(location_params)
-		#@location.user = current_user
-		@location.save
-		redirect_to user_locations_path(current_user)
-	end
 
-	def update
-		@user
-		@location = Location.find_by(params[:id]
-		@
-		@location.update(params.require(:location))
-		#(address: params[:address], lat: params[:lat], lng: params[:lng], description: params[:description], loc_type: params[:loc_type], location_edible: params[:location][:edible], user_id: current_user.id)
-		redirect_to location_path(@location)
+		if @location.save
+			redirect_to user_locations_path(current_user)
+		else
+			render :new
+		end
 	end
 
 	def edit
@@ -53,6 +47,17 @@ class LocationsController < ApplicationController
     	else
       		redirect_to locations_path, notice: "You can't edit someone else's location!"
  		end
+	end
+
+	def update
+		@location = Location.find(params[:id])
+		if @location.save
+			@location.update(params.require(:location))
+		#(address: params[:address], lat: params[:lat], lng: params[:lng], description: params[:description], loc_type: params[:loc_type], location_edible: params[:location][:edible], user_id: current_user.id)
+			redirect_to location_path(@location)
+		else
+			render :edit
+		end
 	end
 
 	def destroy
