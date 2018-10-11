@@ -1,14 +1,14 @@
 <%= stylesheet_link_tag "application" %>
  <div class="wrapper">
 
-<% if !@user.locations.empty? %>
+<% if !@locations.empty? %>
   
 <h2>This is alocation entered by <%= @user.name %> </h2>
    
     Click on a location ID to add any changes.
 <br>
  <br>
-<% @user.locations.each do |location| %>
+<% @locations.each do |location| %>
 <li>
     <%= link_to location.id, edit_user_location_path(current_user) %>: 
        <%= location.address %>, 
@@ -17,7 +17,7 @@
 </li>
 <% end %>
 
-<% elsif @user.locations.empty? %>
+<% elsif @locations.empty? %>
 
 <h3>Your location library is currently empty. </h3>
 <br>

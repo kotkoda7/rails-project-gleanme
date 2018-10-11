@@ -1,6 +1,6 @@
 class Location < ApplicationRecord
 
-	belongs_to :user
+	belongs_to :user, optional: true
 	has_many :edible_categories
 	has_many :edibles, through: :edible_categories
 

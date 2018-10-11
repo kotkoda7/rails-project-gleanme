@@ -1,6 +1,15 @@
+Isssues:
 - If logged in already and user goes in menu to log in or sign up:
 flash notice: you are already logged in and redirect_to root.
 
+- http://localhost:3000/users/3/locations not working
+
+user_location_path:
+/users/:user_id/locations
+
+VS
+locations_path
+/locations
 
 
 ---------

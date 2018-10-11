@@ -1,23 +1,21 @@
 class LocationsController < ApplicationController
-	before_action :ensure_login, only: [:new, :create, :edit, :update, :destroy]
+	before_action :authorize_user, only: [:edit, :update, :destroy]
 
 	def home
 		#Welcome page
 	end
 
 	def index
-		if params[:user_id]
-      		@locations = User.find(params[:user_id]).locations
-      		redirect_to user_locations_path
-    	else
-      		@locations = Location.all
-      		redirect_to locations_path
-    	end
+	    #if params[:user_id]
+	      #@locations = User.find(params[:user_id]).locations
+	      #redirect_to user_locations_path(current_user)
+	    #else
+	      @locations = Location.all
+	    #end
 	end
 
 	def show
-	 	@location = Location.find_by(params[:id])
-	 	#@edibles = @location.edibles
+	 	@location = Location.find_by(params[:user_id])
 	end
 
 	def new

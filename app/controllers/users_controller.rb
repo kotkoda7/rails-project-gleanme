@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:edit, :update, :destroy]
+	#before_action :set_user, only: [:edit, :update, :destroy]
 	before_action :authorize_user, only: [:edit, :update, :destroy]
 	
 
@@ -9,8 +9,9 @@ class UsersController < ApplicationController
 	end
 
 	 def show
-  		@user = User.find(params[:id])
+  		#@user = User.find(params[:id])
      	#@locations = @user.locations 
+     	#redirect_to user_locations_path(current_user)
     end
 
     def new

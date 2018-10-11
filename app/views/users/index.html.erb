@@ -1,16 +1,28 @@
 <%= stylesheet_link_tag "application" %>
  <div class="wrapper">
 
+<% if !@locations.empty? %>
+  
+<h2>This is alocation entered by <%= @user.name %> </h2>
+   
+    Click on a location ID to add any changes.
+<br>
+ <br>
+<% @locations.each do |location| %>
+<li>
+    <%= link_to location.id, edit_user_location_path(current_user) %>: 
+       <%= location.address %>, 
+       <%= location.lat %>, 
+       <%= location.lng %>
+</li>
+<% end %>
 
-  <h1>Locations entered by: <%= @user.name %> </h1>
+<% elsif @locations.empty? %>
 
-  <%= f.label :created_at, "Created at" %>
-    <%= f.date_field :created_at %><br>
+<h3>Your location library is currently empty. </h3>
+<br>
+Please add a location or check out the locations that have already been entered using the menu bove.
 
-
-   <ul> <% @locations.each do |location| %>
-    	<li> <%= link_to location.id %> </li>
-    	<li> <%= location.address %> </li>
-
-</ul>
+<% end %>
+		
 </div>
