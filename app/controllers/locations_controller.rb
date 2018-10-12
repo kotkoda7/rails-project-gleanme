@@ -42,7 +42,7 @@ class LocationsController < ApplicationController
     	if logged_in?
 			@user = User.find_by(id: params[:user_id])
 			@location = @user.locations.find_by(id: params[:id])
-			redirect_to user_locations_path(current_user)
+			redirect_to edit_user_location_path(current_user)
     	else
       		redirect_to locations_path, notice: "You can't edit someone else's location!"
  		end

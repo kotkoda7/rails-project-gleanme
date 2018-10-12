@@ -9,9 +9,10 @@ class UsersController < ApplicationController
 	end
 
 	 def show
-  		#@user = User.find(params[:id])
-     	#@locations = @user.locations 
-     	#redirect_to user_locations_path(current_user)
+  		@user = User.find(params[:id])
+     	@locations = @user.locations 
+     	#@location = @user.location
+     	redirect_to user_locations_path(current_user)
     end
 
     def new

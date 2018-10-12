@@ -5,15 +5,15 @@
   
 <h2>This is a location entered by <%= :username %> </h2>
    
-    Click on a location ID to add any changes.
+Click on a location ID for more information:
 <br>
  <br>
 <% @locations.each do |location| %>
 <li>
-    <%= link_to location.id %>: 
-       <%= location.address %>, 
-       <%= location.lat %>, 
-       <%= location.lng %>
+    <h3><%= link_to location.id, location_path(location) %>: </h3>
+       Address: <%= location.address %>, 
+       Latitude: <%= location.lat %>, 
+       Longitude: <%= location.lng %>
 </li>
 <% end %>
 
