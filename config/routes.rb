@@ -3,14 +3,11 @@ Rails.application.routes.draw do
   root to: 'locations#home'
 
 
-
+ 
   resources :users, only: [:show] do
     resources :locations, only: [:index, :show, :new, :create, :edit, :update]
   end
-
-  resources :locations, only: [:index, :show]
-
-
+ resources :locations, only: [:index, :show]
   resources :users
   
   resources :sessions, only: [:new, :create, :destroy]
@@ -25,7 +22,7 @@ Rails.application.routes.draw do
   #end
 
   resources :edible_categories
-    resources :edibles
+  resources :edibles
   #end
 
   

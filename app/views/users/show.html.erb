@@ -3,14 +3,14 @@
 
 <% if !@locations.empty? %>
   
-<h2>This is alocation entered by <%= @user.name %> </h2>
+<h2>This is a location entered by <%= :username %> </h2>
    
     Click on a location ID to add any changes.
 <br>
  <br>
 <% @locations.each do |location| %>
 <li>
-    <%= link_to location.id, edit_user_location_path(current_user) %>: 
+    <%= link_to location.id %>: 
        <%= location.address %>, 
        <%= location.lat %>, 
        <%= location.lng %>

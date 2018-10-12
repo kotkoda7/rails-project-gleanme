@@ -6,12 +6,13 @@ class LocationsController < ApplicationController
 	end
 
 	def index
-	    #if params[:user_id]
-	      #@locations = User.find(params[:user_id]).locations
-	      #redirect_to user_locations_path(current_user)
-	    #else
+	    if params[:user_id]
+	      @locations = User.find(params[:user_id]).locations
+	      render 'users/show'
+	    else
 	      @locations = Location.all
-	    #end
+	      render 'index'
+	    end
 	end
 
 	def show
@@ -28,7 +29,7 @@ class LocationsController < ApplicationController
 	end
 
 	def create
-		@location = Location.new(location_params)
+		@location = current_user.locations.new(location_params)
 
 		if @location.save
 			redirect_to user_locations_path(current_user)
