@@ -1,1 +1,28 @@
+<%= stylesheet_link_tag "application" %>
+ <div class="wrapper">
 
+<% if !@locations.empty? %>
+  
+<h2>List of locations entered by <%= current_user.username %> </h2>
+   
+Click on a location ID for more information:
+<br>
+ <br>
+<% @locations.each do |location| %>
+<li>
+    <h3>#<%= link_to location.id, location_path(location) %>: </h3>
+       Address: <%= location.address %>, 
+       Latitude: <%= location.lat %>, 
+       Longitude: <%= location.lng %>
+</li>
+<% end %>
+
+<% else %>
+
+<h3>Your location library is currently empty. </h3>
+<br>
+Please add a location or check out the locations that have already been entered using the menu bove.
+
+<% end %>
+		
+</div>

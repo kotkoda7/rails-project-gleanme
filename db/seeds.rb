@@ -14,8 +14,9 @@ leo = User.create(id:2, username: "Leo", password: "efgh")
 
 at = Edible.create(name: "Apple Tree")
 bb = Edible.create(name: "Blueberry Bush")
-pr = Location.create(id: 1, loc_type: "Private")
-pu = Location.create(id: 2, loc_type: "Public")
+
+pr = Location.create(loc_type: "Private")
+pu = Location.create(loc_type: "Public")
 
 fruit = EdibleCategory.create(name: "Fresh Fruit")
 veggie = EdibleCategory.create(name: "Fresh Vegetables")

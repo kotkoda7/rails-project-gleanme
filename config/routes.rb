@@ -2,11 +2,10 @@ Rails.application.routes.draw do
   
   root to: 'locations#home'
 
-
- 
   resources :users, only: [:show] do
     resources :locations, only: [:index, :show, :new, :create, :edit, :update]
   end
+
  resources :locations, only: [:index, :show]
   resources :users
   

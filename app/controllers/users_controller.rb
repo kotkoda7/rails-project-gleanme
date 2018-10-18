@@ -4,18 +4,22 @@ class UsersController < ApplicationController
 	
 
 	def index
+		# list of user's entered locations
 		@user = User.find(params[:id])
 		@locations = @user.locations
+		redirect_to user_locations_path(current_user)
 	end
 
 	 def show
+	 	#user's (show of) specific location 
   		@user = User.find(params[:id])
      	@locations = @user.locations 
      	#@location = @user.location
-     	redirect_to user_locations_path(current_user)
+     	#redirect_to user_locations_path(current_user)
     end
 
     def new
+    	#sign up
 		@user = User.new
 	end
 
@@ -37,7 +41,7 @@ class UsersController < ApplicationController
 private
 
     def user_params
-    	params.require(:user).permit(:username, :password)
+    	params.require(:user).permit(:username, :password, :location_address)
   	end
 
   	def authorize_user

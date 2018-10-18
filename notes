@@ -1,6 +1,7 @@
 Isssues:
 - If logged in already and user goes in menu to log in or sign up:
 flash notice: you are already logged in and redirect_to root.
+- with _form loc_types don't show up.
 
 - http://localhost:3000/users/3/locations not working
 
@@ -11,7 +12,9 @@ VS
 locations_path
 /locations
 
-
+---------
+Header/navigation
+<%= link_to "Edit this Location", edit_user_location_path(current_user)%>
 ---------
 SESSIONS
 - new -> log in

@@ -6,7 +6,7 @@
 
     <% @locations.each do |location| %>
     <br>
-        Location #<%=link_to location.id, location_path(location) %>
+        #<%=link_to location.id, location_path(location) %>
         
         <%= location.address%>,
         <br>Lat.: <%= location.lat.to_f%>
