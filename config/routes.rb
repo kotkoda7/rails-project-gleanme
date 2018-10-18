@@ -20,9 +20,10 @@ Rails.application.routes.draw do
     #resources :edibles
   #end
 
-  resources :edible_categories
+  
   resources :edibles
-  #end
+    resources :categories
+ #end
 
   
 

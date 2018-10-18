@@ -9,4 +9,11 @@ class EdiblesController < ApplicationController
 		@edible = Edible.new
 	end
 
+	
+	private
+
+		def edible_params
+			params.require(:edible).permit(:id, :name) 
+		end
+	end
 end

@@ -19,18 +19,8 @@
 
     <br>
     Location type:
-      <%= f.fields_for :location do |loc| %>
-      <%= loc.collection_select :loc_type, Location.all, :loc_type, :loc_type, prompt: true %>
-
-    <% end %>
-  
-
-      <select name="location_id" id="location_id">
-        <option value="1">Public</option>
-        <option value="2">Private</option>
-      </select>
-     
-
+      <%= f.select(:loc_type, options_for_select([['Public', 'Public'], ['Private', 'Private']]), prompt:true )%>
+    
   <br>
     Food type:
       <%= f.fields_for :edible do |le| %>
@@ -38,13 +28,13 @@
       <% end %>
 
   <br>
-      Category:
-      <%= f.fields_for :edible_category do |ec| %>
-      <%= ec.collection_select :edble_category_id, EdibleCategory.all, :id, :name, include_blank: false %><br>
-    <% end %>
+      Select category:
+      <%= f.collection_select :category_id, Category.all, :id, :name %>
+    
+  <br>
+  
 
-   		<br>
-
+  <br>
      <%= f.submit%></h3>
 
     <% end %>

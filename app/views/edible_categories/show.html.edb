@@ -1,7 +1,0 @@
-
-<%= @ediblecat.name %>
-
-<% @edibles.each do |e| %>
-	<%= e.name %>
-
-	<% end %>

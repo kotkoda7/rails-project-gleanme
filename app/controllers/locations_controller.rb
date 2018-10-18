@@ -16,8 +16,9 @@ class LocationsController < ApplicationController
 	end
 
 	def show
-	 	@location = Location.find_by(params[:user_id])
+	 	@location = Location.find_by(params[:id])
 	 	@edibles = Edible.all
+	 	@edible = Edible.find_by(params[:id])
 	end
 
 	def new
@@ -84,6 +85,6 @@ class LocationsController < ApplicationController
 	private
 
 	def location_params
-		params.require(:location).permit(:id, :address, :desscription, :lat, :lng, :description, :user_id, :user_name, :loc_type, :edible_ids => []) 
+		params.require(:location).permit(:id, :address, :desscription, :lat, :lng, :description, :user_id, :user_name, :loc_type, :edible_name, :category_name, :category_ids => [], :edible_ids => []) 
 	end
 end

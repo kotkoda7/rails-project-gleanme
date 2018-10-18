@@ -1,6 +1,6 @@
 class Edible < ApplicationRecord
 
-	has_many :locations, through: :edible_categories
-	has_many :edible_categories
+	has_many :locations, through: :categories
+	has_many :categories
 
 end
