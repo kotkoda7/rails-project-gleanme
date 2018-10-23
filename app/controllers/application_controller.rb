@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-protect_from_forgery with: :exception
+  protect_from_forgery with: :exception
 
-helper_method :logged_in?, :current_user
+  helper_method :current_user, :logged_in?, :ensure_login
 
 
 	def current_user
@@ -16,11 +16,20 @@ helper_method :logged_in?, :current_user
 		unless session.include? :user_id
       		redirect_to '/'
       	flash[:message] = "Please sign up or log in!"
-    end
+    	end
 	end
 
+	def authorize_user
+      unless @user == current_user
+      		redirect_to root_path 
+      	flash[:message] = "You can only do this action if if you created the location!"
+      #some error message would be useful
+    end
+  end
 
 end
+
+
 
 
 

@@ -1,0 +1,2 @@
+class EdibleLocationsController < ApplicationController
+end

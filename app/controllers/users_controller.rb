@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	#before_action :set_user, only: [:edit, :update, :destroy]
-	before_action :authorize_user, only: [:edit, :update, :destroy]
-	
+	#before_action :ensure_login, only: [:edit, :update, :destroy]
+	#before_action :euthorize_user, only: [:edit, :update, :destroy]
 
 	def index
 		# list of user's entered locations
@@ -44,10 +44,7 @@ private
     	params.require(:user).permit(:username, :password, :location_address)
   	end
 
-  	def authorize_user
-      redirect_to root_path unless @user == current_user
-      #some error message would be useful
-    end
-  end
+  	
+ end
 
 

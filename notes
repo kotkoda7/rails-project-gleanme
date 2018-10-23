@@ -1,3 +1,12 @@
+
+Do I need (edible) categories in order to satisfy requirement for join table and user able to submit other than foreign key? 
+I MAY
+Might be ok 
+- address of locations for certain edible
+- name of edibles for certain location
+
+
+
 Isssues:
 - If logged in already and user goes in menu to log in or sign up:
 flash notice: you are already logged in and redirect_to root.
@@ -76,7 +85,37 @@ can edit only if current_user!
 
 NEED ERROR message if username already exist -> can't sign up or log in
 
-Authorize_user issue??? 
+
+- Allow to add category - yes only if adding edible
 
 
-- Allow to add category
+
+
+
+
+
+SessionsController => skip_before_filter :require_login, :only => [:new, :create]
+
+
+
+ApplicationController
+
+before_filter :require_login
+
+private
+
+	def current_user
+    	User.find_by(id: session[:user_id]) if session[:user_id]
+  	end
+
+  def require_login
+    unless logged_in?
+      flash[:error] = "You must be logged in to access this section"
+      redirect_to '/' #halts request cycle
+    end
+  end
+
+  def logged_in?
+    !!current_user
+  end
+end

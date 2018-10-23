@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
 	has_many :locations
   	has_many :edibles, through: :locations
+  	accepts_nested_attributes_for :locations
 
   	validates :username, presence: true, uniqueness: true
 

@@ -1,0 +1,170 @@
+
+Food type:
+      <%= f.fields_for :edible do |le| %>
+      <%= le.collection_select :edible_id, Edible.order('name ASC').all, :id, :name, {:prompt => true, :multiple=>true } %>
+      <% end %>
+
+
+----------
+Location belongs_to user
+
+The association method returns the associated object, if any. If no associated object is found, it returns nil:
+@user = @location.user
+
+The association= method assigns an associated object to this object. Behind the scenes, this means extracting the primary key from the associate object and setting this object’s foreign key to the same value:
+@location.user = @user
+
+@user = @location.create_user(:user_id => 123,
+  :user_name => "John Doe")
+
+User has_many locations:
+@locations = @user.locations
+@user.locations << @location1
+@user.locations.delete(@location1)
+
+@location_ids = @user.location_ids
+
+<% if @user.locations.empty? %>
+  No locations Found
+<% end %>
+
+@location = @user.locations.create(:location_id => "12345")
+
+4.3.2.20 :through
+The :through option specifies a join model through which to perform the query. has_many :through associations provide a way to implement many-to-many relationships, as discussed earlier in this guide.
+
+4.3.2.21 :uniq
+Specify the :uniq => true option to remove duplicates from the collection. This is most useful in conjunction with the :through option.
+
+----
+patrials and locals:
+new.html.erb
+
+<h1>New zone</h1>
+<%= error_messages_for :zone %>
+<%= render :partial => "form", :locals => 
+  { :button_label => "Create zone", :zone => @zone } %>
+edit.html.erb
+
+<h1>Editing zone</h1>
+<%= error_messages_for :zone %>
+<%= render :partial => "form", :locals => 
+  { :button_label => "Update zone", :zone => @zone } %>
+_form.html.erb
+
+<% form_for(zone) do |f| %>
+  <p>
+    <b>Zone name</b><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit button_label %>
+  </p>
+<% end %>
+
+Every partial also has a local variable with the same name as the partial (minus the underscore). You can pass an object in to this local variable via the :object option:
+<%= render :partial => "customer", :object => @new_customer %>
+Within the customer partial, the customer variable will refer to @new_customer from the parent view.
+
+If you have an instance of a model to render into a partial, you can use a shorthand syntax:
+<%= render :partial => @customer %>
+Assuming that the @customer instance variable contains an instance of the Customer model, this will use _customer.html.erb to render it.
+
+3.4.5 Rendering Collections
+Partials are very useful in rendering collections. When you pass a collection to a partial via the :collection option, the partial will be inserted once for each member in the collection:
+
+index.html.erb
+
+<h1>Products</h1>
+<%= render :partial => "product", :collection => @products %>
+_product.html.erb
+
+<p>Product Name: <%= product.name %></p>
+When a partial is called with a pluralized collection, then the individual instances of the partial have access to the member of the collection being rendered via a variable named after the partial. In this case, the partial is _product, and within the _product partial, you can refer to product to get the instance that is being rendered. To use a custom local variable name within the partial, specify the :as option in the call to the partial:
+
+<%= render :partial => "product", :collection => @products, :as => :item %>
+With this change, you can access an instance of the @products collection as the item local variable within the partial.
+
+Rails also makes a counter variable available within a partial called by the collection, named after the member of the collection followed by _counter. For example, if you’re rendering @products, within the partial you can refer to product_counter to tell you how many times the partial has been rendered.
+----
+There’s also a shorthand syntax available for rendering collections. For example, if @products is a collection of products, you can render the collection this way:
+
+index.html.erb
+
+<h1>Products</h1>
+<%= render :partial => @products %>
+_product.html.erb
+
+<p>Product Name: <%= product.name %></p>
+Rails determines the name of the partial to use by looking at the model name in the collection. In fact, you can even create a heterogeneous collection and render it this way, and Rails will choose the proper partial for each member of the collection:
+
+index.html.erb
+
+<h1>Contacts</h1>
+<%= render :partial => 
+  [customer1, employee1, customer2, employee2] %>
+_customer.html.erb
+
+<p>Name: <%= customer.name %></p>
+_employee.html.erb
+
+<p>Name: <%= employee.name %></p>
+In this case, Rails will use the customer or employee partials as appropriate for each member of the collection.
+---------------------
+<% form_for :article, @article, :url => { :action => "create" }, :html => {:class => "nifty_form"} do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_area :body, :size => "60x12" %>
+  <%= submit_tag "Create" %>
+<% end %>
+
+There are a few things to note here:
+
+:article is the name of the model and @article is the actual object being edited.
+There is a single hash of options. Routing options are passed in the :url hash, HTML options are passed in the :html hash.
+The form_for method yields a form builder object (the f variable).
+Methods to create form controls are called on the form builder object f
+---
+<% form_for :person, @person, :url => { :action => "create" } do |person_form| %>
+  <%= person_form.text_field :name %>
+  <% fields_for @person.contact_detail do |contact_details_form| %>
+    <%= contact_details_form.text_field :phone_number %>
+  <% end %>
+<% end %>
+--
+## Creating a new article
+# long-style:
+form_for(:article, @article, :url => articles_path)
+# same thing, short-style (record identification gets used):
+form_for(@article)
+
+## Editing an existing article
+# long-style:
+form_for(:article, @article, :url => article_path(@article), :method => "put")
+# short-style:
+form_for(@article)
+--
+
+# controller:
+@person = Person.new(:city_id => 2)
+
+# view:
+<%= select(:person, :city_id, [['Lisbon', 1], ['Madrid', 2], ...]) %>
+
+# select on a form builder
+<%= f.select(:city_id, ...) %>
+
+<%= collection_select(:person, :city_id, City.all, :id, :name) %>
+
+<% form_for @person do |person_form| %>
+  <%= person_form.text_field :name %>
+  <% for address in @person.addresses %>
+    <% person_form.fields_for address, :index => address do |address_form|%>
+      <%= address_form.text_field :city %>
+    <% end %>
+  <% end %>
+<% end %>
+
+This will result in a params hash that looks like
+{'person' => {'name' => 'Bob', 'address' => {'23' => {'city' => 'Paris'}, '45' => {'city' => 'London'}}}}
+
+

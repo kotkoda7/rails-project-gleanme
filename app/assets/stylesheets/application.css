@@ -17,7 +17,6 @@
 @media screen {
 
 
-
   * {
     list-style: none;
     margin: 0;
@@ -41,6 +40,8 @@
     font-family: Sans-Serif;
     line-height: 18px;
   }
+
+  
 
   .wrapper {
     background: #fff;
@@ -82,7 +83,6 @@
   p {
     margin-bottom: 18px;
   }
-
 
 
 

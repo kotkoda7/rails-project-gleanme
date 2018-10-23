@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CategoryControllerTest < ActionDispatch::IntegrationTest
+class EdibleLocationTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

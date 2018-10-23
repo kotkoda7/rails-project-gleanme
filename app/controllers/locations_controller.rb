@@ -1,5 +1,6 @@
 class LocationsController < ApplicationController
-	before_action :logged_in?, except: [:show, :index]
+	#before_action :current_user, except: [:show, :index]
+
 
 	def home
 		#Welcome page
@@ -7,6 +8,7 @@ class LocationsController < ApplicationController
 
 	def index
 	    if params[:user_id]
+	    	
 	      @locations = User.find(params[:user_id]).locations
 	      render 'users/index'
 	    else
@@ -15,37 +17,34 @@ class LocationsController < ApplicationController
 	    end
 	end
 
-	def show
-	 	@location = Location.find_by(params[:id])
-	 	@edibles = Edible.all
-	 	@edible = Edible.find_by(params[:id])
-	end
-
 	def new
 		#add a new location (aka user's location), must be logged in to do that!
-		if logged_in?
+		if current_user
 			@user = User.find_by(id: params[:user_id])
-			@location = Location.new(user_id: params[:user_id])
+			@location = Location.new(id: params[:user_id])
 			@locations = Location.all
+			@edibles = Edible.all
 		else
 			redirect_to locations_path, alert: "You must be logged in to create a location."
 		end
 	end
 
 	def create
-		@location = current_user.locations.new(location_params)
+	    @location = Location.new(location_params)
+	    @location.user = current_user
 
-		if @location.save
-			redirect_to user_locations_path(current_user)
-		else
-			render :new
-		end
-	end
+	    if @location.save
+	      	redirect_to user_locations_path(current_user)
+	    else
+	      @locations = Location.all
+	      render :new
+	    end
+  	end
 
 	def edit
 		#edit of location (by same user only)
 #raise params.inspect
-    	if logged_in?
+    	if current_user
 			@user = User.find_by(id: params[:user_id])
 			#@location = Location.find_by(id: params[:id])
 			@location = @user.locations.find_by(id: params[:id])
@@ -70,6 +69,12 @@ class LocationsController < ApplicationController
 		end
 	end
 
+	def show
+	 	@location = Location.find_by(params[:id])
+	 	@edibles = Edible.all
+	 	@edible = Edible.find_by(params[:id])
+	end
+
 	def destroy
     	@location = Location.find(params[:id])
     	if logged_in?
@@ -84,7 +89,7 @@ class LocationsController < ApplicationController
 
 	private
 
-	def location_params
-		params.require(:location).permit(:id, :address, :desscription, :lat, :lng, :description, :user_id, :user_name, :loc_type, :edible_name, :category_name, :category_ids => [], :edible_ids => []) 
+		def location_params
+			params.require(:location).permit(:id, :address, :desscription, :lat, :lng, :description, :user_id, :user_name, :loc_type, :edible_name, :category_name, :category_ids => [], :edible_ids => [], edible_locations_attributes: [ :edible_id]) 
+		end
 	end
-end
