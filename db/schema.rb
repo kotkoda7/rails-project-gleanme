@@ -17,13 +17,13 @@ ActiveRecord::Schema.define(version: 2018_10_18_202534) do
     t.integer "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["edible_id"], name: "index_edible_locations_on_edible_id"
   end
 
   create_table "edibles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "category_id"
   end
 
   create_table "locations", force: :cascade do |t|

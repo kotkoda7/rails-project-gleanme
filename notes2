@@ -1,3 +1,40 @@
+  def create
+      @location = Location.new(location_params)
+      @location.user = current_user
+
+      if @location.save
+          redirect_to user_locations_path(current_user)
+      else
+        @locations = Location.all
+        render :new
+      end
+    end
+
+    
+@edibles = 6.times.collect { @location.edible_locations.build }
+<br>
+    <h3> Food type: </h3>
+    <%= f.fields_for :edible_locations, @edibles do |el| %> 
+      <h4> <%= el.collection_check_boxes :edible_id, Edible.order('name ASC').all, :id, :name, { checked: true, multiple: true } %>
+<br>
+        <%= el.fields_for :edible_locations, @location.edible_locations.build do |edible| %>
+    <br>Or create new food type: <%= edible.text_field :id %>
+    <% end %>
+   
+        <br>
+      <% end %>
+------
+<br>
+    <h3> Food type: </h3>
+    <%= f.fields_for :edible do |e| %> 
+      <div><h4> <%= e.collection_check_boxes :edible_id, Edible.order('name ASC').all, :id, :name, { checked: true, multiple: true } %>
+      </div>
+        <br>
+      <% end %>
+
+<br>
+
+OR
 
 Food type:
       <%= f.fields_for :edible do |le| %>

@@ -8,4 +8,8 @@ Welcome <%= current_user.username %> |
 
 <% end %>
 
-
+<div><center>
+	<% if flash.now[:notice] %>
+<%= flash.now[:notice] %>
+<% end %>
+</div>

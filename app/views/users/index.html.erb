@@ -10,7 +10,7 @@ Click on a location ID for more information:
  <br>
 <% @locations.each do |location| %>
 <li>
-    <h3>#<%= link_to location.id, location_path(location) %>: </h3>
+    <h3>#<%= link_to location.id, user_location_path(location.user, location) %>: </h3>
        Address: <%= location.address %>, 
        Latitude: <%= location.lat %>, 
        Longitude: <%= location.lng %>

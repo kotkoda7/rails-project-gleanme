@@ -6,6 +6,8 @@ class Location < ApplicationRecord
 	has_many :edibles, through: :edible_locations
 	has_many :edible_locations
 	accepts_nested_attributes_for :edible_locations
+	accepts_nested_attributes_for :edibles
+	
 	#, through: :categories
 
 	validates :address, presence: true

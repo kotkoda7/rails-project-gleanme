@@ -13,7 +13,8 @@ class SessionsController < ApplicationController
       else
         session[:user_id] = @user.id
         flash.now[:notice] = "You have successfully logged in"
-        redirect_to user_locations_path(@user)
+        redirect_to '/'
+        #user_locations_path(@user)
       end
     end
 

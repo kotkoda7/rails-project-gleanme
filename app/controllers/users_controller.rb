@@ -13,9 +13,13 @@ class UsersController < ApplicationController
 	 def show
 	 	#user's (show of) specific location 
   		@user = User.find(params[:id])
-     	@locations = @user.locations 
-     	#@location = @user.location
-     	#redirect_to user_locations_path(current_user)
+     	#@location = Location.find[:id]
+     	@locations = @user.locations
+
+     	@location = @user.locations.find(params[:id])
+     	#@edible = @location.edible_locations.find(params[:id])
+
+     	#redirect_to user_location_path(current_user)
     end
 
     def new
@@ -41,7 +45,7 @@ class UsersController < ApplicationController
 private
 
     def user_params
-    	params.require(:user).permit(:username, :password, :location_address)
+    	params.require(:user).permit(:username, :password, :location_address, :location_lat, :location_lng, :location_description, :edible_name, :edible_ids => [], edible_locations_attributes: [ :edible_id, edible: [:name]])
   	end
 
   	

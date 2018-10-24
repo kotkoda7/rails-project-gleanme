@@ -3,10 +3,14 @@ class User < ApplicationRecord
 	has_secure_password
 
 	#accepts_nested_attributes_for :locations, allow_destroy: true
+    has_many :locations
+    has_many :edibles, through: :edible_locations
+    has_many :edible_locations
+    
+	  has_many :locations
+  	has_many :locations, through: :edible_locations
+  	accepts_nested_attributes_for :edible_locations
 
-	has_many :locations
-  	has_many :edibles, through: :locations
-  	accepts_nested_attributes_for :locations
 
   	validates :username, presence: true, uniqueness: true
 

@@ -2,11 +2,14 @@ Rails.application.routes.draw do
   
   root to: 'locations#home'
 
+  get 'users/:id/locations/:id' => 'users#show', :as => :user_location_path
+
   resources :users, only: [:show] do
-    resources :locations, only: [:index, :show, :new, :create, :edit, :update]
+    resources :locations, only: [:index, :new, :create, :edit, :update]
   end
 
- resources :locations, only: [:index, :show]
+  
+resources :locations, only: [:index, :show, :new, :create]
   resources :users
   
   resources :sessions, only: [:new, :create, :destroy]

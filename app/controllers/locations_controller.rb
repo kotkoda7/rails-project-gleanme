@@ -8,8 +8,9 @@ class LocationsController < ApplicationController
 
 	def index
 	    if params[:user_id]
-	    	
+	    	@user = User.find_by(id: params[:user_id])
 	      @locations = User.find(params[:user_id]).locations
+	      #@location = @user.location
 	      render 'users/index'
 	    else
 	      @locations = Location.all
@@ -23,23 +24,24 @@ class LocationsController < ApplicationController
 			@user = User.find_by(id: params[:user_id])
 			@location = Location.new(id: params[:user_id])
 			@locations = Location.all
-			@edibles = Edible.all
+			@edible = Edible.new
+			@edibles = 6.times.collect { @location.edible_locations.build }
 		else
 			redirect_to locations_path, alert: "You must be logged in to create a location."
 		end
 	end
 
 	def create
-	    @location = Location.new(location_params)
-	    @location.user = current_user
+	    location = current_user.locations.new(location_params)
 
-	    if @location.save
+	    if location.save
 	      	redirect_to user_locations_path(current_user)
 	    else
 	      @locations = Location.all
 	      render :new
 	    end
   	end
+
 
 	def edit
 		#edit of location (by same user only)
@@ -90,6 +92,7 @@ class LocationsController < ApplicationController
 	private
 
 		def location_params
-			params.require(:location).permit(:id, :address, :desscription, :lat, :lng, :description, :user_id, :user_name, :loc_type, :edible_name, :category_name, :category_ids => [], :edible_ids => [], edible_locations_attributes: [ :edible_id]) 
+			params.require(:location).permit(:id, :address, :desscription, :lat, :lng, :description, :user_id, :user_name, :loc_type, :edible_name, :category_name, :category_ids => [], :edible_ids => [], edible_locations_attributes: [ :edible_id, edible: [:name]]) 
+			
 		end
 	end
