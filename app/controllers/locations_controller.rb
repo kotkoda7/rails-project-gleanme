@@ -48,8 +48,10 @@ class LocationsController < ApplicationController
 #raise params.inspect
     	if current_user
 			@user = User.find_by(id: params[:user_id])
+			@location = Location.find_by(id: params[:id])
 			#@location = Location.find_by(id: params[:id])
-			@location = @user.locations.find_by(id: params[:id])
+			@edibles = @location.edible_locations.all
+			
 			
 			render 'edit'
 			#redirect_to edit_user_location_path(current_user)

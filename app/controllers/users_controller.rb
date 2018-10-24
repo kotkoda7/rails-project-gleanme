@@ -12,11 +12,14 @@ class UsersController < ApplicationController
 
 	 def show
 	 	#user's (show of) specific location 
-  		@user = User.find(params[:id])
+  		#@user = User.find(params[:id])
      	#@location = Location.find[:id]
-     	@locations = @user.locations
-
-     	@location = @user.locations.find(params[:id])
+     	#@locations = Location.all
+     	@location = Location.find(params[:id])
+     	@edible = Edible.find(params[:id])
+     	@edibles = @location.edible_locations.all
+     	#@edibles = EdibleLocation.find(params[:id])
+     	#@location = @user.locations.find(params[:id])
      	#@edible = @location.edible_locations.find(params[:id])
 
      	#redirect_to user_location_path(current_user)
