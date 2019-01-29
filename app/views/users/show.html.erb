@@ -7,25 +7,26 @@
     #<%= @location.id %> </h3>
 
 <h3>Address:</h3>
-    <%= @location.address %> 
+    <%= @location_address %> 
 <br>
 <h3>Latitude:</h3>
-    <%= @location.lat %> 
+    <%= @location_lat %> 
 <br>
 <h3>Longitude:</h3>
-    <%= @location.lng %> 
+    <%= @location_lng %> 
 
 <h3>Location description:</h3>
-<%= @location.description %>
+<%= @location_description %>
 <br>
 
 <h3>Location type:</h3>
-    <%= @location.loc_type %> 
+    <%= @location_loc_type %> 
 <br>
 
 <h3>Food available:</h3>
 
-<%= @location.edible_locations.each do |e| %>
+
+<%= @edibles.each do |e| %>
 
   <%= e.name %>
 <% end %>

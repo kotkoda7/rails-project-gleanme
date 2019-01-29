@@ -6,7 +6,7 @@
     <h3>Here are the list of food in our database:</h3>
     <% @edibles.each do |edible| %>
     <br>
-        <%=link_to edible.name, edible_locations_path(edible) %>
+        <%=link_to edible.name, location_edibles_path(edible) %>
 
     <br>
     </ul>

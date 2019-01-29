@@ -24,12 +24,13 @@
 <br>
 
 <h3>Food available:</h3>
-	<%= @edible.name %>
-
+	<% @edibles.each do |edible| %>
+	<%= edible.name %>
+ <% end %>
 <br>
 <br>
 
-
+<%= link_to "Edit this Location", edit_user_location_path(current_user)%>
 
 
 </div>

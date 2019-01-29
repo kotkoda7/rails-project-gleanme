@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_18_202534) do
-
-  create_table "edible_locations", force: :cascade do |t|
-    t.integer "edible_id"
-    t.integer "location_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["edible_id"], name: "index_edible_locations_on_edible_id"
-  end
+ActiveRecord::Schema.define(version: 2018_11_01_193110) do
 
   create_table "edibles", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "location_edibles", force: :cascade do |t|
+    t.string "name"
+    t.integer "edible_id"
+    t.integer "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
