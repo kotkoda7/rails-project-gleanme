@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(version: 2018_11_01_193110) do
   end
 
   create_table "location_edibles", force: :cascade do |t|
-    t.string "name"
     t.integer "edible_id"
     t.integer "location_id"
+    t.string "availability"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

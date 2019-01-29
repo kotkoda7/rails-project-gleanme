@@ -1,21 +1,19 @@
 class LocationsController < ApplicationController
-	before_action :current_user, except: [:show, :index]
-
+	before_action :current_user, except: [:home, :show, :index]
+	#before_action :own_location, only: [:edit, :update]
 
 	def home
 		#Welcome page
 	end
 
 	def index
-	    if params[:user_id]
-	    	@user = User.find_by(id: params[:user_id])
-	      @locations = User.find(params[:user_id]).locations
-	      #@location = @user.location
-	      render 'users/index'
-	    else
-	      @locations = Location.all
-	      render 'index'
-	    end
+	    @locations = Location.all
+	end
+
+	def show
+	 	@location = Location.find_by_id(params[:id])
+	 	#@location = Location.find_by(params[:id])
+	 	@edibles = @location.location_edibles #nested??
 	end
 
 	def new
@@ -31,27 +29,22 @@ class LocationsController < ApplicationController
 		end
 	end
 
- def create
-      @location = Location.new(location_params)
-      @location.user = current_user
-
-      if @location.save
-          redirect_to user_locations_path(current_user)
-      else
-        @locations = Location.all
-        redirect_to root_path
-      end
-    end
+ 	def create
+		@location = Location.new(location_params)
+		@location.user = current_user
+		@location.save
+		redirect_to user_path(current_user)
+	end
 
 
 	def edit
 		#edit of location (by same user only)
-#raise params.inspect
+		#raise params.inspect
     	if current_user
 			@user = User.find_by(id: params[:user_id])
 			@location = Location.find_by(id: params[:id])
 			#@location = Location.find_by(id: params[:id])
-			@edibles = @location.location_edibles.all
+			@edibles = Edible.all
 			
 			render 'edit'
 			#redirect_to edit_user_location_path(current_user)
@@ -61,12 +54,19 @@ class LocationsController < ApplicationController
 
 	end
 
+
 	def update
+
 		@user = User.find_by(id: params[:user_id])
 		@location = @user.locations.find_by(id: params[:id])
+		@edible = Edible.find_by(id: params[:id])
+
+		unless current_user == @location.user
+   		redirect_to(@location, notice: "You cannot edit other people's entry")
 		
 		if @location.save
 			@location.update(location_params)
+			@location.location_edibles.update(location_params)
 		#(address: params[:address], lat: params[:lat], lng: params[:lng], description: params[:description], loc_type: params[:loc_type], location_edible: params[:location][:edible], user_id: current_user.id)
 			redirect_to location_path(@location)
 		else
@@ -74,12 +74,26 @@ class LocationsController < ApplicationController
 		end
 	end
 
-	def show
-	 	@location = Location.find_by(params[:id])
-	 	#@edibles = @location.edibles
-	 	#@edible = Edible.find_by(params[:id])
-	 	@edibles = @location.location_edibles
+	
+
 	end
+
+=begin
+	def update
+		@user = User.find_by(id: params[:user_id])
+		@location = @user.locations.find_by(id: params[:id])
+		@edible = Edible.find_by(id: params[:id])
+		
+		if @location.save
+			@location.update(location_params)
+			@location.location_edibles.update(location_params)
+		#(address: params[:address], lat: params[:lat], lng: params[:lng], description: params[:description], loc_type: params[:loc_type], location_edible: params[:location][:edible], user_id: current_user.id)
+			redirect_to location_path(@location)
+		else
+			render :edit
+		end
+	end
+=end
 
 	def destroy
     	@location = Location.find(params[:id])
@@ -88,7 +102,7 @@ class LocationsController < ApplicationController
     		flash[:notice] = "Location deleted."
     		redirect_to user_locations_path
     	else
-    		flash.now[:notice] = "You cannot delete another user's location."
+    		flash.now[:notice] = "You cannot delete another people's entry."
     	end
   	end
 
@@ -96,7 +110,13 @@ class LocationsController < ApplicationController
 	private
 
 		def location_params
-			params.require(:location).permit(:id, :address, :desscription, :lat, :lng, :description, :user_id, :user_name, :loc_type, :edible_name, :category_name, :category_ids => [], :edible_ids => [], location_edibles_attributes: [ :edible_id, edible: [:name]]) 
-			
+			params.require(:location).permit(:id, :address, :desscription, :lat, :lng, :user_id, :user_name, :loc_type, :edible_name, :edible_ids => [], location_edibles_attributes: [ :edible_id, edible: [:name]]) 
 		end
+
+		 #def own_location
+  			#if !current_user == Location.current_user
+    		#redirect_to @location, notice: "You cannot edit this location"
+  		#end  
+  	#end
+
 	end

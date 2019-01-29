@@ -1,0 +1,2 @@
+module LocationEdiblesHelper
+end
