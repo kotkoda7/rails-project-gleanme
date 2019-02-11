@@ -5,6 +5,22 @@ class SessionsController < ApplicationController
   end
 
   def create
+    if auth_hash = request.env("omniauth.auth")
+      request.env["omniauth.auth"]["email"]
+      user = User.find_by(:email) => request.env["omniauth.auth"]["email"]
+    else
+       user = User.find_by(username: params[:user][:username])
+       
+      if user && user.authenticate(params[:password])
+        session[:user_id] = user.id
+        redirect_to root_path, notice: "You have successfully logged in"
+      else
+        flash[:alert] = "Your username or password is not correct"
+        #redirect_to login_path
+        render 'sessions/new'
+      end
+  end
+end
 
 =begin
     user = User.find_by(username: params[:user][:username])
@@ -17,9 +33,9 @@ class SessionsController < ApplicationController
         redirect_to login_path
       end
   end
-=end
 
-  def create_google
+
+  def create
     
     @user = User.find_or_create_by(uid: auth['uid']) do |u|
       u.name = auth['info']['name']
@@ -31,6 +47,7 @@ class SessionsController < ApplicationController
  
     render 'locations/home'
   end
+=end
 
   def destroy
     session.clear
