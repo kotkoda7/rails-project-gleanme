@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 	before_action :set_user, only: [:edit, :update, :destroy]
 	before_action :authorize_user, only: [:edit, :update, :destroy]
 	
+	
 	def new
 		@user = User.new
 	end
@@ -14,6 +15,7 @@ class UsersController < ApplicationController
 
 
 	def create
+
 	    @user = User.new(user_params)
 	    if @user.save
 	      session[:user_id] = @user.id
@@ -22,19 +24,15 @@ class UsersController < ApplicationController
 	      render 'new'
 	    end
   	end
-
-  	def show
-  		@user = User.find(params[:id])
-     	@locations = @user.locations 
-    	#@edibles = @user.edibles
-    	#@edible = Edible.new
-    	#@edibles = 3.times.map { @edibles.build }
+  
+  def show
+  		redirect_to location_path
     end
 
 private
 
     def user_params
-    	params.require(:user).permit(:username, :password)
+    	params.require(:user).permit(:username, :password, :edible_ids => [], edibles_attributes: [:name])
   	end
 
   	def authorize_user
@@ -42,5 +40,3 @@ private
       #some error message would be useful
     end
   end
-
-

@@ -1,21 +1,22 @@
 
+
 <%= form_for [@user, @location] do |f| %>
 
   <%= f.hidden_field :user_id %>
 
    <h3>
-   	<%= f.label :address %>:
-   	<%= f.text_field :address, size: "40x1"%><br>
-   		
-   	<%= f.label :lat, "Latitude" %>:
-   	<%= f.number_field :lat, step: 0.01 %>
+    <%= f.label :address %>:
+    <%= f.text_field :address, size: "40x1"%><br>
+      
+    <%= f.label :lat, "Latitude" %>:
+    <%= f.number_field :lat, step: 0.01 %>
 
 
-   	<%= f.label :lng, "Longitude" %>:
-   	<%= f.number_field :lng, step: 0.01 %><br>
+    <%= f.label :lng, "Longitude" %>:
+    <%= f.number_field :lng, step: 0.01 %><br>
 
-   	<%= f.label :description %>:
-   	<%= f.text_area :description, placeholder: "Please describe the location", size: "53x6" %>
+    <%= f.label :description %>:
+    <%= f.text_area :description, placeholder: "Please describe the location", size: "53x6" %>
 
     <br>
     Location type: 

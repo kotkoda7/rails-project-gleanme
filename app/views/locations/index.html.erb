@@ -2,7 +2,7 @@
 <div class="wrapper">
 
   <% if @locations.exists? %>
-    <h3>Here are the list of locations entered into the database:</h3>
+    <h3>Here are the list of locations entered into the database in Bellingham, WA:</h3>
 
     <% @locations.each do |location| %>
     <br>
@@ -18,12 +18,9 @@
           <h4> Click on the ID for more information on the location.</h4>
   <% else %>
     <h4> There are no locations in the database. 
-    Please log in or sign in and add a location using the menu above!</h4>
+    Please log in or sign in and create a location using the menu above!</h4>
 
   <% end %>
-
-
-
 <br>
 
 </div>

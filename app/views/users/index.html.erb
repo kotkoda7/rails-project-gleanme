@@ -1,17 +1,28 @@
+<%= stylesheet_link_tag "application" %>
+ <div class="wrapper">
 
-<h4>This will show all the locations for the particular user.</h4>
+<% if !@locations.empty? %>
+  
+<h2>List of locations entered by <%= current_user.username %> </h2>
+   
+Click on a location ID for more information:
+<br>
+ <br>
+<% @locations.each do |location| %>
+<li>
+    <h3>#<%= link_to location.id, user_location_path(location.user, location) %>: </h3>
+       Address: <%= location.address %>, 
+       Latitude: <%= location.lat %>, 
+       Longitude: <%= location.lng %>
+</li>
+<% end %>
 
+<% else %>
 
-<h1>My Locations</h1>
+<h3>Your location library is currently empty. </h3>
+<br>
+Please add a location or check out the locations that have already been entered using the menu bove.
 
-
-    <% @locations.each do |location| %>
-      <%= link_to location.id, location %>
-
-          <% if location.user == current_user %>
-            <%= link_to 'Edit', edit_location_path(location) %>
-          <% end %>
-
-          <% if location.user == current_user %>
-            <%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end %>
+<% end %>
+		
+</div>
