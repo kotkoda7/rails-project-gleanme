@@ -5,12 +5,21 @@ class SessionsController < ApplicationController
   end
 
   def create
+    @user = User.find_or_create_from_auth_hash(env["omniauth.auth"])
+    session[:user_id] = @user.id
+    redirect_to root_path
+  end
+
+
+
+=begin
+  def create
     if auth_hash = request.env("omniauth.auth")
       request.env["omniauth.auth"]["email"]
       user = User.find_by(:email) => request.env["omniauth.auth"]["email"]
     else
        user = User.find_by(username: params[:user][:username])
-       
+
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
         redirect_to root_path, notice: "You have successfully logged in"
@@ -22,7 +31,7 @@ class SessionsController < ApplicationController
   end
 end
 
-=begin
+
     user = User.find_by(username: params[:user][:username])
     password = params[:user][:password]
       if user && user.authenticate(password)
@@ -54,7 +63,7 @@ end
     redirect_to login_path, :notice => "You are logged out!"
   end
  
-  private
+private
  
   def auth
     request.env['omniauth.auth']

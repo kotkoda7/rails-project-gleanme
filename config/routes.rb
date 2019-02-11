@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   
   root to: 'locations#home'
 
-  get '/auth/google_auth2/callback' => 'sessions#create'
+  get '/auth/:provider/callback' => 'sessions#create'
+
+  
 
  resources :users, only: [:show] do
     resources :locations
