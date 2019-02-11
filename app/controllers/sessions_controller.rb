@@ -5,6 +5,8 @@ class SessionsController < ApplicationController
   end
 
   def create
+
+=begin
     user = User.find_by(username: params[:user][:username])
     password = params[:user][:password]
       if user && user.authenticate(password)
@@ -14,12 +16,31 @@ class SessionsController < ApplicationController
         flash[:alert] = "Your username or password is not correct"
         redirect_to login_path
       end
-    end
+  end
+=end
 
+  def create_google
+    
+    @user = User.find_or_create_by(uid: auth['uid']) do |u|
+      u.name = auth['info']['name']
+      u.email = auth['info']['email']
+      u.image = auth['info']['image']
+    end
+ 
+    session[:user_id] = @user.id
+ 
+    render 'locations/home'
+  end
 
   def destroy
     session.clear
     redirect_to login_path, :notice => "You are logged out!"
+  end
+ 
+  private
+ 
+  def auth
+    request.env['omniauth.auth']
   end
 
 end

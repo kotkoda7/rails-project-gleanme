@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   
   root to: 'locations#home'
 
+  get '/auth/google/callback' => 'sessions#create_google'
+
  resources :users, only: [:show] do
     resources :locations
   end
