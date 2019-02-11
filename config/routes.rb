@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'locations#home'
 
   get '/auth/:provider/callback' => 'sessions#create'
+  get 'auth/failure', to: redirect('/')
 
   
 

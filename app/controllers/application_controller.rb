@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?, :ensure_login, :set_user
 
+
     def set_user
       @user = User.find(params[:user_id])
     end
