@@ -12,23 +12,36 @@ class SessionsController < ApplicationController
         session[:user_id] = user.id
         redirect_to root_path, notice: "You have successfully logged in"
       else
-        flash[:alert] = "Your username or password is not correct"
+        flash[:notice] = "Your username or password is not correct"
         redirect_to login_path
       end
   end
    
 
   def create_google
-     @user = User.find_or_create_by(uid: auth['uid']) do |u|
+
+     user = User.find_or_create_by(uid: auth['uid']) do |u|
       u.name = auth['info']['name']
       u.email = auth['info']['email']
       u.image = auth['info']['image']
     end
  
-    session[:user_id] = @user.id
- 
-    redirect_to 'locations/home'
+    session[:user_id] = user.id
+    redirect_to root_path, notice: "You are logged in with Google"
   end
+
+  def destroy
+    session.clear
+    redirect_to login_path, notice: "You are logged out!"
+  end
+ 
+private
+ 
+  def auth
+    request.env['omniauth.auth']
+  end
+
+end
 
 =begin
 
@@ -61,15 +74,3 @@ end
 
 =end
 
-  def destroy
-    session.clear
-    redirect_to login_path, :notice => "You are logged out!"
-  end
- 
-private
- 
-  def auth
-    request.env['omniauth.auth']
-  end
-
-end

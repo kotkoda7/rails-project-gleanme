@@ -3,13 +3,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?, :ensure_login, :set_user
 
-
     def set_user
       @user = User.find(params[:user_id])
     end
 
   def current_user
-      User.find_by(id: session[:user_id]) if session[:user_id]
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+      #User.find_by(id: session[:user_id]) if session[:user_id]
     end
 
   def logged_in?
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   def authorize_user
       unless @user == current_user
           redirect_to root_path 
-        flash[:message] = "You can only do this action if if you created the location!"
+        flash[:message] = "You can only do this action if you created the location!"
       #some error message would be useful
     end
   end

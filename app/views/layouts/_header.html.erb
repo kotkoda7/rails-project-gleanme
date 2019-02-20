@@ -1,13 +1,12 @@
+
 <% if current_user %>
 
-Welcome <%= current_user.username %> |
+Welcome <%= current_user.username %> 
+
 	
 		<%= link_to "My Locations", user_locations_path(current_user) %> |
 
-
 		<%= link_to "Create a Location", new_user_location_path(current_user) %>
-		
-
 <% end %>
 
 <div><center>
@@ -15,3 +14,8 @@ Welcome <%= current_user.username %> |
 <%= flash.now[:notice] %>
 <% end %>
 </div>
+
+
+
+
+

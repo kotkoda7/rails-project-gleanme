@@ -1,15 +1,15 @@
 class LocationsController < ApplicationController
 	before_action :current_user, except: [:show, :index]
+	#before_action :ensure_login 
 	skip_before_action :verify_authenticity_token
 
 
 	def home
-		#Welcome page
 	end
 
 	def index
 	    if params[:user_id]
-	    	@user = User.find_by(id: params[:user_id])
+	      @user = User.find_by(id: params[:user_id])
 	      @locations = User.find(params[:user_id]).locations
 	      #@location = @user.location
 	      render 'users/index'
@@ -46,6 +46,16 @@ class LocationsController < ApplicationController
 
 
 	def edit
+
+		 @location = Location.find(params[:id])
+    if @location.user == current_user
+      render 'edit'
+    else
+      redirect_to locations_path(@location), notice: "You can't edit someone else's location!"
+    end
+
+
+=begin
 		#edit of location (by same user only)
 #raise params.inspect
     	if current_user
@@ -59,10 +69,21 @@ class LocationsController < ApplicationController
     	else
       		redirect_to locations_path, notice: "You can't edit someone else's location!"
  		end
+=end
 
 	end
 
 	def update
+
+
+		 @location = Location.find(params[:id])
+      if @location.update(location_params)
+        redirect_to location_path(@location)
+      else
+        render 'edit'
+      end
+
+=begin
 		@user = User.find_by(id: params[:user_id])
 		@location = @user.locations.find_by(id: params[:id])
 		
@@ -73,10 +94,11 @@ class LocationsController < ApplicationController
 		else
 			render :edit
 		end
+=end
 	end
 
 	def show
-	 	@location = Location.find_by(params[:id])
+	 	@location = Location.find(params[:id])
 	 	#@edibles = @location.edibles
 	 	#@edible = Edible.find_by(params[:id])
 	 	@edibles = @location.location_edibles
@@ -98,6 +120,5 @@ class LocationsController < ApplicationController
 
 		def location_params
 			params.require(:location).permit(:id, :address, :desscription, :lat, :lng, :description, :user_id, :user_name, :loc_type, :edible_name, :category_name, :category_ids => [], :edible_ids => [], location_edibles_attributes: [ :edible_id, edible: [:name]]) 
-			
 		end
 	end

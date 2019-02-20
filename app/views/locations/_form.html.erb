@@ -22,6 +22,9 @@
     Location type: 
       <%= f.select(:loc_type, options_for_select([['Public', 'Public'], ['Private', 'Private']]), prompt:true )%> </h3>
     
+<h3> Food AVAILABILITY: </h3>
+
+
   <br>
     <h3> Food type: </h3>
     <%= f.fields_for :edible do |el| %> 
