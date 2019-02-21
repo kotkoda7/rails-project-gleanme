@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
 	before_action :current_user, except: [:show, :index]
-	#before_action :ensure_login 
+	before_action :ensure_login 
 	skip_before_action :verify_authenticity_token
 
 
@@ -26,34 +26,33 @@ class LocationsController < ApplicationController
 			@location = Location.new(id: params[:user_id])
 			@locations = Location.all
 			@edible = Edible.new
-			@edibles = 6.times.collect { @location.location_edibles.build }
+			@edibles = @location.location_edibles.build
 		else
 			redirect_to locations_path, alert: "You must be logged in to create a location."
 		end
 	end
 
- def create
+	def create
       @location = Location.new(location_params)
       @location.user = current_user
 
       if @location.save
           redirect_to user_locations_path(current_user)
       else
-        @locations = Location.all
-        redirect_to root_path
+        redirect_to locations_path
       end
     end
 
 
 	def edit
-
 		 @location = Location.find(params[:id])
-    if @location.user == current_user
-      render 'edit'
-    else
-      redirect_to locations_path(@location), notice: "You can't edit someone else's location!"
-    end
-
+		 @edibles = @location.location_edibles
+    		if @location.user == current_user
+      			render 'edit'
+    		else
+      			redirect_to locations_path(@location), notice: "You can't edit someone else's location!"
+    		end
+	end
 
 =begin
 		#edit of location (by same user only)
@@ -71,7 +70,7 @@ class LocationsController < ApplicationController
  		end
 =end
 
-	end
+
 
 	def update
 
@@ -82,7 +81,7 @@ class LocationsController < ApplicationController
       else
         render 'edit'
       end
-
+end
 =begin
 		@user = User.find_by(id: params[:user_id])
 		@location = @user.locations.find_by(id: params[:id])
@@ -95,7 +94,7 @@ class LocationsController < ApplicationController
 			render :edit
 		end
 =end
-	end
+
 
 	def show
 	 	@location = Location.find(params[:id])

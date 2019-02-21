@@ -32,9 +32,10 @@
 <br>
 <br>
 
-<%= link_to "Edit this Location", edit_user_location_path(current_user)%>
-<%= link_to 'Delete this location',  user_location_path(current_user),
-    data: { confirm: 'Are you sure?' }, method: :destroy %>
-
+<% if current_user && current_user.id == @location.user_id %>
+	<%= link_to "Edit this Location", edit_user_location_path(current_user)%>
+	<%= link_to 'Delete this location',  user_location_path(current_user),
+	    data: { confirm: 'Are you sure?' }, method: :delete %>
+<% end %>
 
 </div>

@@ -5,15 +5,14 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback' => 'sessions#create_google'
   get 'auth/failure', to: redirect('/')
 
-
- resources :users, only: [:show] do
+ resources :users do
     resources :locations
   end
 
-get 'users/:id/locations/:id' => 'users#show', :as => :user_location_path
+  get 'users/:id/locations/:id' => 'users#show', :as => :user_location_path
 
   
-resources :locations, only: [:index, :show, :new, :create, :edit, :update]
+  resources :locations
   resources :users
   
   resources :sessions, only: [:new, :create, :destroy]

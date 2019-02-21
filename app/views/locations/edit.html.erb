@@ -3,4 +3,6 @@
 	
 	<h2>Edit an existing location:</h2>
 
-	<%= render 'form' %>
+	<%#= render 'form' %>
+
+	<%= render partial: 'form', locals: {location: @location, user: @location.user, edible: @location.location_edibles} %>

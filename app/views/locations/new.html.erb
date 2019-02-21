@@ -3,8 +3,8 @@
 	
 	<h2>Fill out this form to add a new location:</h2>
 
-	<%= render 'form', location: @location, edible: @edibles %>
-
+	<%#= render 'form', location: @location %>
+	<%= render partial: 'form', locals: {location: @location, user: @location.user, edible: @location.location_edibles} %>
 
 </div>
 

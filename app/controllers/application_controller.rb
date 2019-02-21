@@ -30,9 +30,4 @@ class ApplicationController < ActionController::Base
       #some error message would be useful
     end
   end
-
 end
-
-
-
-
