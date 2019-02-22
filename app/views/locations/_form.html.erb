@@ -22,8 +22,9 @@
     Location type: 
       <%= f.select(:loc_type, options_for_select([['Public', 'Public'], ['Private', 'Private']]), prompt:true )%> </h3>
     
-<h3> Food AVAILABILITY: </h3>
-
+<h3> Food availability: </h3>
+    <%#= f.label :availability %>
+    <%#= f.text_area :availability, placeholder: "Please briefly describe availability of food", size: "25x3" %>
 
   <br>
     <h3> Food type: </h3>

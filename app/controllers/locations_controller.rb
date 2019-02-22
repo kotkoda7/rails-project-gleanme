@@ -11,7 +11,6 @@ class LocationsController < ApplicationController
 	    if params[:user_id]
 	      @user = User.find_by(id: params[:user_id])
 	      @locations = User.find(params[:user_id]).locations
-	      #@location = @user.location
 	      render 'users/index'
 	    else
 	      @locations = Location.all
@@ -47,6 +46,7 @@ class LocationsController < ApplicationController
 	def edit
 		 @location = Location.find(params[:id])
 		 @edibles = @location.location_edibles
+	 	@availability = @location.location_edibles
     		if @location.user == current_user
       			render 'edit'
     		else
@@ -73,8 +73,6 @@ class LocationsController < ApplicationController
 
 
 	def update
-
-
 		 @location = Location.find(params[:id])
       if @location.update(location_params)
         redirect_to location_path(@location)
@@ -98,9 +96,9 @@ end
 
 	def show
 	 	@location = Location.find(params[:id])
-	 	#@edibles = @location.edibles
 	 	#@edible = Edible.find_by(params[:id])
-	 	@edibles = @location.location_edibles
+	 	@edibles = @location.location_edibles.all
+	 	@availability = @location.location_edibles.first
 	end
 
 	def destroy
@@ -118,6 +116,6 @@ end
 	private
 
 		def location_params
-			params.require(:location).permit(:id, :address, :desscription, :lat, :lng, :description, :user_id, :user_name, :loc_type, :edible_name, :category_name, :category_ids => [], :edible_ids => [], location_edibles_attributes: [ :edible_id, edible: [:name]]) 
+			params.require(:location).permit(:id, :address, :desscription, :lat, :lng, :description, :user_id, :user_name, :loc_type, :edible_name, :availability, :edible_ids => [], location_edibles_attributes: [ :edible_id, :availability, edible: [:name]]) 
 		end
 	end

@@ -19,6 +19,16 @@ pr = Location.create(loc_type: "Private")
 pu = Location.create(loc_type: "Public")
 
 
+#s = LocationEdible.create(availability: "Summer")
+#au = LocationEdible.create(availability: "Autumn")
+#sp = LocationEdible.create(availability: "Spring")
+#w = LocationEdible.create(availability: "Winter")
+#d = LocationEdible.create(availability: "Certain Days")
+#nd = LocationEdible.create(availability: "Not Available")
+
+
+
+
 #fruit = Category.create(id: 1, name: "Fresh Fruit")
 #veggie = Category.create(id: 2, name: "Fresh Vegetables")
 #pre = Category.create(id: 3, name: "Pre-Cooked")
