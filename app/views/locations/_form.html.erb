@@ -30,7 +30,7 @@
     <h3> Food type: </h3>
     <%= f.fields_for :edibles, Edible.all do |le| %> 
       <h4> <%= le.label le.object.name %>
-        <%= le.fields_for :location_edibles, le.object.location_edibles.build do |el| %>
+        <%= le.fields_for :edible_locations, le.object.edible_locations.build do |el| %>
           <%= el.check_box "#{el.object.id}" %>
       <% end %>
     <% end %>

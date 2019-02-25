@@ -25,7 +25,7 @@ class LocationsController < ApplicationController
 			@location = Location.new(id: params[:user_id])
 			@locations = Location.all
 			@edible = Edible.new
-			@edibles = @location.location_edibles.build
+			@edibles = @location.edible_locations.build
 		else
 			redirect_to locations_path, alert: "You must be logged in to create a location."
 		end
@@ -45,8 +45,8 @@ class LocationsController < ApplicationController
 
 	def edit
 		 @location = Location.find(params[:id])
-		 @edibles = @location.location_edibles
-	 	@availability = @location.location_edibles
+		 @edibles = @location.edible_locations
+	 	@availability = @location.edible_locations
     		if @location.user == current_user
       			render 'edit'
     		else
@@ -61,7 +61,7 @@ class LocationsController < ApplicationController
 			@user = User.find_by(id: params[:user_id])
 			@location = Location.find_by(id: params[:id])
 			#@location = Location.find_by(id: params[:id])
-			@edibles = @location.location_edibles.all
+			@edibles = @location.edible_locations.all
 			
 			render 'edit'
 			#redirect_to edit_user_location_path(current_user)
@@ -86,7 +86,7 @@ end
 		
 		if @location.save
 			@location.update(location_params)
-		#(address: params[:address], lat: params[:lat], lng: params[:lng], description: params[:description], loc_type: params[:loc_type], location_edible: params[:location][:edible], user_id: current_user.id)
+		#(address: params[:address], lat: params[:lat], lng: params[:lng], description: params[:description], loc_type: params[:loc_type], edible_location: params[:location][:edible], user_id: current_user.id)
 			redirect_to location_path(@location)
 		else
 			render :edit
@@ -97,8 +97,8 @@ end
 	def show
 	 	@location = Location.find(params[:id])
 	 	#@edible = Edible.find_by(params[:id])
-	 	@edibles = @location.location_edibles.all
-	 	@availability = @location.location_edibles.first
+	 	@edibles = @location.edible_locations.all
+	 	@availability = @location.edible_locations.first
 	end
 
 	def destroy
@@ -116,6 +116,6 @@ end
 	private
 
 		def location_params
-			params.require(:location).permit(:id, :address, :desscription, :lat, :lng, :description, :user_id, :user_name, :loc_type, :edible_name, :availability, location_edibles_attributes: [ :edible_id, :availability, edible: [:name]]) 
+			params.require(:location).permit(:id, :address, :desscription, :lat, :lng, :description, :user_id, :user_name, :loc_type, :edible_name, :availability, edible_locations_attributes: [ :edible_id, :availability, edible: [:name]]) 
 		end
 	end

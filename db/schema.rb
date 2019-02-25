@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_11_201314) do
+ActiveRecord::Schema.define(version: 2019_02_25_195442) do
 
-  create_table "edibles", force: :cascade do |t|
-    t.string "name"
+  create_table "edible_locations", force: :cascade do |t|
+    t.integer "edible_id"
+    t.integer "location_id"
+    t.string "availability"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "location_edibles", force: :cascade do |t|
-    t.integer "edible_id"
-    t.integer "location_id"
-    t.string "availability"
+  create_table "edibles", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
