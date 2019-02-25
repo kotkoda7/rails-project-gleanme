@@ -11,7 +11,6 @@ Rails.application.routes.draw do
 
   get 'users/:id/locations/:id' => 'users#show', :as => :user_location_path
 
-  
   resources :locations
   resources :users
   
@@ -26,16 +25,5 @@ Rails.application.routes.draw do
     #resources :edibles
   #end
 
-  
-  resources :edibles
-    resources :categories
 
-    resources :edible_locations
- #end
-
-
-
-  #devise_for :users
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-end
+  end

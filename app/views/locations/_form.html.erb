@@ -28,16 +28,12 @@
 
   <br>
     <h3> Food type: </h3>
-    <%= f.fields_for :location_edibles do |le| %> 
-      <h4> <%= le.collection_check_boxes :edible_ids, Edible.order('name ASC').all, :id, :name, { checked: true, multiple: true } %>
-            
-<br>
-        <%= le.fields_for :edibles, Edible.new do |build| %>
-    <br>
-    Or create new food type: <%= build.text_field :name %>
-    <% end %>
+    <%= f.fields_for :edibles, Edible.all do |le| %> 
+      <h4> <%= le.label le.object.name %>
+        <%= le.fields_for :location_edibles, le.object.location_edibles.build do |el| %>
+          <%= el.check_box "#{el.object.id}" %>
       <% end %>
-   
+    <% end %>
         <br>
 
   <br>

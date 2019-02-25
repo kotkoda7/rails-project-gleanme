@@ -34,7 +34,7 @@ class LocationsController < ApplicationController
 	def create
       @location = Location.new(location_params)
       @location.user = current_user
-
+      binding.pry
       if @location.save
           redirect_to user_locations_path(current_user)
       else
@@ -116,6 +116,6 @@ end
 	private
 
 		def location_params
-			params.require(:location).permit(:id, :address, :desscription, :lat, :lng, :description, :user_id, :user_name, :loc_type, :edible_name, :availability, :edible_ids => [], location_edibles_attributes: [ :edible_id, :availability, edible: [:name]]) 
+			params.require(:location).permit(:id, :address, :desscription, :lat, :lng, :description, :user_id, :user_name, :loc_type, :edible_name, :availability, location_edibles_attributes: [ :edible_id, :availability, edible: [:name]]) 
 		end
 	end
